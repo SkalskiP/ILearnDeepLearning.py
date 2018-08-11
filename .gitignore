@@ -1,0 +1,4 @@
+.idea/*
+data/*
+.env/*
+.ipynb_checkpoints/*
