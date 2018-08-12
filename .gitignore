@@ -1,4 +1,4 @@
 .idea/*
-data/*
+**/data
 .env/*
-.ipynb_checkpoints/*
+**/.ipynb_checkpoints
