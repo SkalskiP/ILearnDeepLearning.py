@@ -45,7 +45,7 @@ This project is mainly focused on visualizing quite complex issues related to gr
 
 ## Preventing Deep Neural Network from Overfitting
 
-This time I focused on the analysis of the reasons for overfitting and ways to prevent it. I made simulations of neural network regulation for different lambda coefficients, analyzing the change of values in the weight matrix. Take a look at the visualizations that were created in the process.
+This time I focused on the analysis of the reasons for overfitting and ways to prevent it. I made simulations of neural network regulation for different lambda coefficients, analyzing the change of values in the weight matrix. Take a look at the visualizations that were created in the process. Also check the article [Preventing Deep Neural Network from Overfitting][3].
 
 <p align="center"> 
     <img width="500" src="./02_exploring_overfitting/final_visualisations/bias_variance.gif" alt="Change of accuracy">
@@ -66,3 +66,4 @@ This time I focused on the analysis of the reasons for overfitting and ways to p
 
 [1]: https://medium.com/@piotr.skalski92
 [2]: https://towardsdatascience.com/https-medium-com-piotr-skalski92-deep-dive-into-deep-networks-math-17660bc376ba
+[3]: https://towardsdatascience.com/preventing-deep-neural-network-from-overfitting-953458db800a
