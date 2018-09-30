@@ -76,6 +76,10 @@ Both in my articles and projects I try to create interesting visualizations, whi
     <b>Figure 5.</b> Figure 2. Lorenz Attractor created using the Matplotlib animation API.
 </p>
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md][6] file for details
+
 ## Interesting materials and ideas
 
 This is a place where I collect links to interesting articles and papers, which I hope will become the basis for my next projects in the future.
@@ -87,3 +91,4 @@ This is a place where I collect links to interesting articles and papers, which 
 [3]: https://towardsdatascience.com/preventing-deep-neural-network-from-overfitting-953458db800a
 [4]: https://towardsdatascience.com/simple-method-of-creating-animated-graphs-127c11f58cc5
 [5]: https://arxiv.org/abs/1607.06520
+[6]: ./LICENSE.md
