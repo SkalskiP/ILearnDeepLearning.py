@@ -73,7 +73,7 @@ Both in my articles and projects I try to create interesting visualizations, whi
 </p>
 
 <p align="center"> 
-    <b>Figure 5.</b> Figure 2. Lorenz Attractor created using the Matplotlib animation API.
+    <b>Figure 5.</b> Lorenz Attractor created using the Matplotlib animation API.
 </p>
 
 ## License
