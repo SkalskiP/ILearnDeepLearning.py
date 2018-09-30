@@ -2,7 +2,7 @@
 
 ## Description
 
-This repository contains small projects related to Neural Networks and Deep Learning in general. Subject are closely linekd with articles I publish on [Medium][1]. I encourage you both to read as well as to check how the code works in the action.
+This repository contains small projects mainly related to Deep Learning but also Data Science in general. Subjects are closely linekd with articles I publish on [Medium][1] and are intended to complement the blog posts. I hope that the content of the repository will turn out to be interesting and, above all, useful. I encourage you both to read as well as to check how the code works in the action.
 
 ## Hit the ground running
 
@@ -64,6 +64,26 @@ This time I focused on the analysis of the reasons for overfitting and ways to p
     <b>Figure 4.</b> Change of accuracy values in subsequent epochs during neural network learning.
 </p>
 
+## Simple Method of Creating Animated Graphs
+
+Both in my articles and projects I try to create interesting visualizations, which very often allow me to communicate my ideas much more effectively. I decided to create a short tutorial to show you how to easily create animated visualizations using Matplotlib. I also encourage you to read - [Simple Method of Creating Animated Graphs][4] - where I described, among other things, how to create a visualization of neural network learning process.
+
+<p align="center"> 
+    <img width="500" src="./03_animated_graphs/final_visualisations/lorenz_attractor.gif" alt="Change of accuracy">
+</p>
+
+<p align="center"> 
+    <b>Figure 5.</b> Figure 2. Lorenz Attractor created using the Matplotlib animation API.
+</p>
+
+## Interesting materials and ideas
+
+This is a place where I collect links to interesting articles and papers, which I hope will become the basis for my next projects in the future.
+
+1. [Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings][5]
+
 [1]: https://medium.com/@piotr.skalski92
 [2]: https://towardsdatascience.com/https-medium-com-piotr-skalski92-deep-dive-into-deep-networks-math-17660bc376ba
 [3]: https://towardsdatascience.com/preventing-deep-neural-network-from-overfitting-953458db800a
+[4]: https://towardsdatascience.com/simple-method-of-creating-animated-graphs-127c11f58cc5
+[5]: https://arxiv.org/abs/1607.06520
