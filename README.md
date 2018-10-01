@@ -85,6 +85,8 @@ This project is licensed under the MIT License - see the [LICENSE.md][6] file fo
 This is a place where I collect links to interesting articles and papers, which I hope will become the basis for my next projects in the future.
 
 1. [Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings][5]
+2. [Sequence to Sequence Learning with Neural Networks][7]
+3. [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation][8]
 
 [1]: https://medium.com/@piotr.skalski92
 [2]: https://towardsdatascience.com/https-medium-com-piotr-skalski92-deep-dive-into-deep-networks-math-17660bc376ba
@@ -92,3 +94,5 @@ This is a place where I collect links to interesting articles and papers, which 
 [4]: https://towardsdatascience.com/simple-method-of-creating-animated-graphs-127c11f58cc5
 [5]: https://arxiv.org/abs/1607.06520
 [6]: ./LICENSE.md
+[7]: https://arxiv.org/abs/1409.3215
+[8]: https://arxiv.org/abs/1406.1078
