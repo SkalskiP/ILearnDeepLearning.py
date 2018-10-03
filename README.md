@@ -88,6 +88,7 @@ This is a place where I collect links to interesting articles and papers, which 
 2. [Sequence to Sequence Learning with Neural Networks][7]
 3. [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation][8]
 4. [BLEU: a Method for Automatic Evaluation of Machine Translation][9]
+5. [Neural Machine Translation by Jointly Learning to Align and Translate][10]
 
 [1]: https://medium.com/@piotr.skalski92
 [2]: https://towardsdatascience.com/https-medium-com-piotr-skalski92-deep-dive-into-deep-networks-math-17660bc376ba
@@ -98,3 +99,4 @@ This is a place where I collect links to interesting articles and papers, which 
 [7]: https://arxiv.org/abs/1409.3215
 [8]: https://arxiv.org/abs/1406.1078
 [9]: https://www.aclweb.org/anthology/P02-1040.pdf
+[10]: https://arxiv.org/abs/1409.0473
