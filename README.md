@@ -2,7 +2,7 @@
 
 ## Description
 
-This repository contains small projects mainly related to Deep Learning but also Data Science in general. Subjects are closely linekd with articles I publish on [Medium][1] and are intended to complement the blog posts. I hope that the content of the repository will turn out to be interesting and, above all, useful. I encourage you both to read as well as to check how the code works in the action.
+People say that nothing develops and teaches you like getting your hands dirty. This repository contains small projects mostly related to Deep Learning but also Data Science in general. Subjects are closely linekd with articles I publish on [Medium][1] and are intended to complement those blog posts. For me it is a way to document my learning process, but also to help others understand neural network related issues. I hope that the content of the repository will turn out to be interesting and, above all, useful. I encourage you both to read my posts as well as to check how the code works in the action.
 
 ## Hit the ground running
 
@@ -22,8 +22,9 @@ pip install -r requirements.txt
 ```
 
 ## Deep Dive into Math Behind Deep Networks
+[Medium articule][2] - Source code
 
-This project is mainly focused on visualizing quite complex issues related to gradient descent, activation functions and visualization of classification boundaries while teaching the model. It is a code that complements the issues described in more detail in the article [Deep Dive into Math Behind Deep Networks][2]. Here are some of the visualizations that have been created.
+This project is mainly focused on visualizing quite complex issues related to gradient descent, activation functions and visualization of classification boundaries while teaching the model. It is a code that complements the issues described in more detail in the article. Here are some of the visualizations that have been created.
 
 <p align="center"> 
     <img height="250" src="./01_mathematics_of_nn/final_visualisations/keras_frames.png" alt="Keras model frames">
@@ -32,7 +33,7 @@ This project is mainly focused on visualizing quite complex issues related to gr
 
 <p align="center"> 
     <b>Figure 1.</b> A classification boundaries graph created in every iteration of the Keras model.</br>
-    Finally, the frames were combined to create an animation.
+    Finally, the frames were combined to create an animation. 
 </p>
 
 <p align="center"> 
@@ -43,16 +44,30 @@ This project is mainly focused on visualizing quite complex issues related to gr
     <b>Figure 2.</b> Visualization of the gradient descent.
 </p>
 
-## Preventing Deep Neural Network from Overfitting
+## Let’s code a Neural Network in plain NumPy
+[Medium articule][11] - Source code
 
-This time I focused on the analysis of the reasons for overfitting and ways to prevent it. I made simulations of neural network regulation for different lambda coefficients, analyzing the change of values in the weight matrix. Take a look at the visualizations that were created in the process. Also check the article [Preventing Deep Neural Network from Overfitting][3].
+After a theoretical introduction, the time has come for practical implementation of the neural network using NumPy. In this notebook you will find full source code and a comparison of the performance of the basic implementation with the model created with Keras. You can find a wider commentary to understand the order and meaning of performed functions in a related article.
+
+<p align="center"> 
+    <img width="500" src="./04_numpy_neural_net/supporting_visualizations/numpy_model_animation.gif" alt="NumPy NN animation">
+</p>
+
+<p align="center"> 
+    <b>Figure 3.</b> Visualisation of the classification boundaries achieved with simple NumPy model
+</p>
+
+## Preventing Deep Neural Network from Overfitting
+[Medium articule][3] - Source code
+
+This time I focused on the analysis of the reasons for overfitting and ways to prevent it. I made simulations of neural network regulation for different lambda coefficients, analyzing the change of values in the weight matrix. Take a look at the visualizations that were created in the process. 
 
 <p align="center"> 
     <img width="500" src="./02_exploring_overfitting/final_visualisations/bias_variance.gif" alt="Change of accuracy">
 </p>
 
 <p align="center"> 
-    <b>Figure 3.</b> Figure 3. Classification boundaries created by: top right corner - linear regression;</br>
+    <b>Figure 4.</b> Figure 3. Classification boundaries created by: top right corner - linear regression;</br>
     bottom left corner - neural network; bottom right corner - neural network with regularisation
 </p>
 
@@ -61,19 +76,20 @@ This time I focused on the analysis of the reasons for overfitting and ways to p
 </p>
 
 <p align="center"> 
-    <b>Figure 4.</b> Change of accuracy values in subsequent epochs during neural network learning.
+    <b>Figure 5.</b> Change of accuracy values in subsequent epochs during neural network learning.
 </p>
 
 ## Simple Method of Creating Animated Graphs
+[Medium articule][4] - Source code
 
-Both in my articles and projects I try to create interesting visualizations, which very often allow me to communicate my ideas much more effectively. I decided to create a short tutorial to show you how to easily create animated visualizations using Matplotlib. I also encourage you to read - [Simple Method of Creating Animated Graphs][4] - where I described, among other things, how to create a visualization of neural network learning process.
+Both in my articles and projects I try to create interesting visualizations, which very often allow me to communicate my ideas much more effectively. I decided to create a short tutorial to show you how to easily create animated visualizations using Matplotlib. I also encourage you to read my post where I described, among other things, how to create a visualization of neural network learning process.
 
 <p align="center"> 
     <img width="500" src="./03_animated_graphs/final_visualisations/lorenz_attractor.gif" alt="Change of accuracy">
 </p>
 
 <p align="center"> 
-    <b>Figure 5.</b> Lorenz Attractor created using the Matplotlib animation API.
+    <b>Figure 6.</b> Lorenz Attractor created using the Matplotlib animation API.
 </p>
 
 ## License
@@ -100,3 +116,4 @@ This is a place where I collect links to interesting articles and papers, which 
 [8]: https://arxiv.org/abs/1406.1078
 [9]: https://www.aclweb.org/anthology/P02-1040.pdf
 [10]: https://arxiv.org/abs/1409.0473
+[11]: https://towardsdatascience.com/lets-code-a-neural-network-in-plain-numpy-ae7e74410795
