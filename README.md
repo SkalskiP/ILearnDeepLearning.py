@@ -22,13 +22,13 @@ pip install -r requirements.txt
 ```
 
 ## Deep Dive into Math Behind Deep Networks
-[Medium articule][2] - Source code
+[Medium articule][2] - [Source code](./01_mysteries_of_neural_networks/01_mathematics_of_nn/)
 
 This project is mainly focused on visualizing quite complex issues related to gradient descent, activation functions and visualization of classification boundaries while teaching the model. It is a code that complements the issues described in more detail in the article. Here are some of the visualizations that have been created.
 
 <p align="center"> 
-    <img height="250" src="./01_mathematics_of_nn/final_visualisations/keras_frames.png" alt="Keras model frames">
-    <img height="250" src="./01_mathematics_of_nn/final_visualisations/keras_class_boundaries.gif" alt="Keras class boundries">
+    <img height="250" src="./01_mysteries_of_neural_networks/01_mathematics_of_nn/final_visualisations/keras_frames.png" alt="Keras model frames">
+    <img height="250" src="./01_mysteries_of_neural_networks/01_mathematics_of_nn/final_visualisations/keras_class_boundaries.gif" alt="Keras class boundries">
 </p>
 
 <p align="center"> 
@@ -37,7 +37,7 @@ This project is mainly focused on visualizing quite complex issues related to gr
 </p>
 
 <p align="center"> 
-    <img width="400" src="./01_mathematics_of_nn/final_visualisations/gradient_descent.gif" alt="Gradient descent">
+    <img width="400" src="./01_mysteries_of_neural_networks/01_mathematics_of_nn/final_visualisations/gradient_descent.gif" alt="Gradient descent">
 </p>
 
 <p align="center"> 
@@ -45,12 +45,12 @@ This project is mainly focused on visualizing quite complex issues related to gr
 </p>
 
 ## Let’s code a Neural Network in plain NumPy
-[Medium articule][11] - Source code
+[Medium articule][11] - [Source code](./01_mysteries_of_neural_networks/03_numpy_neural_net/)
 
 After a theoretical introduction, the time has come for practical implementation of the neural network using NumPy. In this notebook you will find full source code and a comparison of the performance of the basic implementation with the model created with Keras. You can find a wider commentary to understand the order and meaning of performed functions in a related article.
 
 <p align="center"> 
-    <img width="500" src="./04_numpy_neural_net/supporting_visualizations/numpy_model_animation.gif" alt="NumPy NN animation">
+    <img width="500" src="./01_mysteries_of_neural_networks/03_numpy_neural_net/supporting_visualizations/numpy_model_animation.gif" alt="NumPy NN animation">
 </p>
 
 <p align="center"> 
@@ -58,12 +58,12 @@ After a theoretical introduction, the time has come for practical implementation
 </p>
 
 ## Preventing Deep Neural Network from Overfitting
-[Medium articule][3] - Source code
+[Medium articule][3] - [Source code](./01_mysteries_of_neural_networks/02_exploring_overfitting/)
 
 This time I focused on the analysis of the reasons for overfitting and ways to prevent it. I made simulations of neural network regulation for different lambda coefficients, analyzing the change of values in the weight matrix. Take a look at the visualizations that were created in the process. 
 
 <p align="center"> 
-    <img width="500" src="./02_exploring_overfitting/final_visualisations/bias_variance.gif" alt="Change of accuracy">
+    <img width="500" src="./01_mysteries_of_neural_networks/02_exploring_overfitting/final_visualisations/bias_variance.gif" alt="Change of accuracy">
 </p>
 
 <p align="center"> 
@@ -72,7 +72,7 @@ This time I focused on the analysis of the reasons for overfitting and ways to p
 </p>
 
 <p align="center"> 
-    <img width="500" src="./02_exploring_overfitting/final_visualisations/train_vs_validation_acc.gif" alt="Change of accuracy">
+    <img width="500" src="./01_mysteries_of_neural_networks/02_exploring_overfitting/final_visualisations/train_vs_validation_acc.gif" alt="Change of accuracy">
 </p>
 
 <p align="center"> 
@@ -80,12 +80,12 @@ This time I focused on the analysis of the reasons for overfitting and ways to p
 </p>
 
 ## Simple Method of Creating Animated Graphs
-[Medium articule][4] - Source code
+[Medium articule][4] - [Source code](./02_data_science_toolkit/01_animated_graphs/])
 
 Both in my articles and projects I try to create interesting visualizations, which very often allow me to communicate my ideas much more effectively. I decided to create a short tutorial to show you how to easily create animated visualizations using Matplotlib. I also encourage you to read my post where I described, among other things, how to create a visualization of neural network learning process.
 
 <p align="center"> 
-    <img width="500" src="./03_animated_graphs/final_visualisations/lorenz_attractor.gif" alt="Change of accuracy">
+    <img width="500" src="./02_data_science_toolkit/01_animated_graphs/final_visualisations/lorenz_attractor.gif" alt="Change of accuracy">
 </p>
 
 <p align="center"> 
