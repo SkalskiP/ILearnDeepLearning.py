@@ -1,5 +1,9 @@
 <h1 align="center">ILearnDeepLearning.py</h1>
 
+<p align="center"> 
+    <img width="200" src="./logo.gif" alt="NumPy NN animation">
+</p>
+
 ## Description
 
 People say that nothing develops and teaches you like getting your hands dirty. This repository contains small projects mostly related to Deep Learning but also Data Science in general. Subjects are closely linekd with articles I publish on [Medium][1] and are intended to complement those blog posts. For me it is a way to document my learning process, but also to help others understand neural network related issues. I hope that the content of the repository will turn out to be interesting and, above all, useful. I encourage you both to read my posts as well as to check how the code works in the action.
