@@ -1,5 +1,9 @@
 <h1 align="center">ILearnDeepLearning.py</h1>
 
+<p align="center"> 
+    <img width="200" src="./logo.gif" alt="NumPy NN animation">
+</p>
+
 ## Description
 
 People say that nothing develops and teaches you like getting your hands dirty. This repository contains small projects mostly related to Deep Learning but also Data Science in general. Subjects are closely linekd with articles I publish on [Medium][1] and are intended to complement those blog posts. For me it is a way to document my learning process, but also to help others understand neural network related issues. I hope that the content of the repository will turn out to be interesting and, above all, useful. I encourage you both to read my posts as well as to check how the code works in the action.
@@ -105,6 +109,7 @@ This is a place where I collect links to interesting articles and papers, which 
 3. [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation][8]
 4. [BLEU: a Method for Automatic Evaluation of Machine Translation][9]
 5. [Neural Machine Translation by Jointly Learning to Align and Translate][10]
+6. [A (Long) Peek into Reinforcement Learning][12]
 
 [1]: https://medium.com/@piotr.skalski92
 [2]: https://towardsdatascience.com/https-medium-com-piotr-skalski92-deep-dive-into-deep-networks-math-17660bc376ba
@@ -117,3 +122,4 @@ This is a place where I collect links to interesting articles and papers, which 
 [9]: https://www.aclweb.org/anthology/P02-1040.pdf
 [10]: https://arxiv.org/abs/1409.0473
 [11]: https://towardsdatascience.com/lets-code-a-neural-network-in-plain-numpy-ae7e74410795
+[12]: https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html#sarsa-on-policy-td-control
