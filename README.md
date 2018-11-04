@@ -110,6 +110,8 @@ This is a place where I collect links to interesting articles and papers, which 
 4. [BLEU: a Method for Automatic Evaluation of Machine Translation][9]
 5. [Neural Machine Translation by Jointly Learning to Align and Translate][10]
 6. [A (Long) Peek into Reinforcement Learning][12]
+7. [Why Momentum Really Works][13]
+8. [Improving the way neural networks learn][14]
 
 [1]: https://medium.com/@piotr.skalski92
 [2]: https://towardsdatascience.com/https-medium-com-piotr-skalski92-deep-dive-into-deep-networks-math-17660bc376ba
@@ -123,3 +125,5 @@ This is a place where I collect links to interesting articles and papers, which 
 [10]: https://arxiv.org/abs/1409.0473
 [11]: https://towardsdatascience.com/lets-code-a-neural-network-in-plain-numpy-ae7e74410795
 [12]: https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html#sarsa-on-policy-td-control
+[13]: https://distill.pub/2017/momentum/
+[14]: http://neuralnetworksanddeeplearning.com/chap3.html
