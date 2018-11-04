@@ -74,9 +74,9 @@ def full_forward_propagation(X, params_values, nn_architecture):
     return A_curr, memory
 
 
-def get_cost_value(Y_hat, Y):
+def get_cost_value(Y_hat, Y, eps = 0.001):
     m = Y_hat.shape[1]
-    cost = -1 / m * (np.dot(Y, np.log(Y_hat).T) + np.dot(1 - Y, np.log(1 - Y_hat).T))
+    cost = -1 / m * (np.dot(Y, np.log(Y_hat + eps).T) + np.dot(1 - Y, np.log(1 - Y_hat  + eps).T))
     return np.squeeze(cost)
 
 
@@ -110,12 +110,12 @@ def single_layer_backward_propagation(dA_curr, W_curr, b_curr, Z_curr, A_prev, a
     return dA_prev, dW_curr, db_curr
 
 
-def full_backward_propagation(Y_hat, Y, memory, params_values, nn_architecture):
+def full_backward_propagation(Y_hat, Y, memory, params_values, nn_architecture, eps = 0.000000000001):
     grads_values = {}
     m = Y.shape[1]
     Y = Y.reshape(Y_hat.shape)
     
-    dA_prev = - (np.divide(Y, Y_hat) - np.divide(1 - Y, 1 - Y_hat))
+    dA_prev = - (np.divide(Y, Y_hat + eps) - np.divide(1 - Y, 1 - Y_hat + eps))
     
     for layer_idx_prev, layer in reversed(list(enumerate(nn_architecture))):
         layer_idx_curr = layer_idx_prev + 1
