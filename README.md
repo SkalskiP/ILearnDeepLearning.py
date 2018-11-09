@@ -71,7 +71,7 @@ This time I focused on the analysis of the reasons for overfitting and ways to p
 </p>
 
 <p align="center"> 
-    <b>Figure 4.</b> Figure 3. Classification boundaries created by: top right corner - linear regression;</br>
+    <b>Figure 4.</b> Classification boundaries created by: top right corner - linear regression;</br>
     bottom left corner - neural network; bottom right corner - neural network with regularisation
 </p>
 
@@ -81,6 +81,28 @@ This time I focused on the analysis of the reasons for overfitting and ways to p
 
 <p align="center"> 
     <b>Figure 5.</b> Change of accuracy values in subsequent epochs during neural network learning.
+</p>
+
+## How to train Neural Network faster with optimizers?
+Medium articule - [Source code](./01_mysteries_of_neural_networks/04_optimizers/)
+
+As I worked on the last article, I had the opportunity to create my own neural network using only Numpy. It was a very challenging task, but at the same time it significantly broadened my understanding of the processes that take place inside the NN.  Among others, this experience made  me truly realize how many factors influence neural net's performance. Selected architecture,proper hyperparameter values or even correct initiation of parameters, are just some of those things... This time however, we will focus on the decision that has a huge impact on learning process speed, as well as the accuracy of obtained predictions - the choice of the optimization strategy.
+
+
+<p align="center"> 
+    <img width="500" src="./01_mysteries_of_neural_networks/04_optimizers/final_visualisations/critical_points.gif" alt="Change of accuracy">
+</p>
+
+<p align="center"> 
+    <b>Figure 6.</b> Examples of points which are a problem for optimization algorithms.
+</p>
+
+<p align="center"> 
+    <img width="500" src="./01_mysteries_of_neural_networks/04_optimizers/final_visualisations/optimizers_comparison.gif" alt="Change of accuracy">
+</p>
+
+<p align="center"> 
+    <b>Figure 7.</b> Optimizers comparison.
 </p>
 
 ## Simple Method of Creating Animated Graphs
@@ -93,7 +115,7 @@ Both in my articles and projects I try to create interesting visualizations, whi
 </p>
 
 <p align="center"> 
-    <b>Figure 6.</b> Lorenz Attractor created using the Matplotlib animation API.
+    <b>Figure 8.</b> Lorenz Attractor created using the Matplotlib animation API.
 </p>
 
 ## License
