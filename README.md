@@ -18,6 +18,7 @@ git clone https://github.com/SkalskiP/ILearnDeepLearning.py.git
 cd ILearnDeepLearning.py
 
 # set up and activate python environment
+apt-get install python3-venv
 python3 -m venv .env
 source .env/bin/activate
 
