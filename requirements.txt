@@ -51,7 +51,6 @@ parso==0.3.1
 pathlib2==2.3.2
 pexpect==4.6.0
 pickleshare==0.7.4
-pkg-resources==0.0.0
 pluggy==0.7.1
 ply==3.11
 prometheus-client==0.3.1
