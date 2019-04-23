@@ -85,7 +85,7 @@ This time I focused on the analysis of the reasons for overfitting and ways to p
 </p>
 
 ## How to train Neural Network faster with optimizers?
-Medium articule - [Source code](./01_mysteries_of_neural_networks/04_optimizers/)
+[Medium articule][16] - [Source code](./01_mysteries_of_neural_networks/04_optimizers/)
 
 As I worked on the last article, I had the opportunity to create my own neural network using only Numpy. It was a very challenging task, but at the same time it significantly broadened my understanding of the processes that take place inside the NN.  Among others, this experience made  me truly realize how many factors influence neural net's performance. Selected architecture,proper hyperparameter values or even correct initiation of parameters, are just some of those things... This time however, we will focus on the decision that has a huge impact on learning process speed, as well as the accuracy of obtained predictions - the choice of the optimization strategy.
 
@@ -152,3 +152,4 @@ This is a place where I collect links to interesting articles and papers, which 
 [13]: https://distill.pub/2017/momentum/
 [14]: http://neuralnetworksanddeeplearning.com/chap3.html
 [15]: https://deepnotes.io/softmax-crossentropy
+[16]: https://towardsdatascience.com/how-to-train-neural-network-faster-with-optimizers-d297730b3713
