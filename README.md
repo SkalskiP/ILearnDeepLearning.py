@@ -124,6 +124,14 @@ Both in my articles and projects I try to create interesting visualizations, whi
 
 In this post on Medium I focused on the theoretical issues related to CNNs. It is a preparation for the upcoming mini project, which aims to create my own, simple implementation of this type of the Neural Network. As a result, this section of the repository is quite narrow and includes mainly simple visualizations of the effects of a convolution with a selected filter.
 
+<p align="center"> 
+    <img width="500" src="./01_mysteries_of_neural_networks/05_mathematics_of_cnn/final_visualisations/convolution.gif" alt="Convolution">
+</p>
+
+<p align="center"> 
+    <b>Figure 9.</b> Convolutionary effect with selected filters.
+</p>
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md][6] file for details
