@@ -119,6 +119,11 @@ Both in my articles and projects I try to create interesting visualizations, whi
     <b>Figure 8.</b> Lorenz Attractor created using the Matplotlib animation API.
 </p>
 
+## Gentle Dive into Math Behind Convolutional Neural Networks
+[Medium articule][17] - [Source code](./01_mysteries_of_neural_networks/05_mathematics_of_cnn/])
+
+In this post on Medium I focused on the theoretical issues related to CNNs. It is a preparation for the upcoming mini project, which aims to create my own, simple implementation of this type of the Neural Network. As a result, this section of the repository is quite narrow and includes mainly simple visualizations of the effects of a convolution with a selected filter.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md][6] file for details
@@ -153,3 +158,4 @@ This is a place where I collect links to interesting articles and papers, which 
 [14]: http://neuralnetworksanddeeplearning.com/chap3.html
 [15]: https://deepnotes.io/softmax-crossentropy
 [16]: https://towardsdatascience.com/how-to-train-neural-network-faster-with-optimizers-d297730b3713
+[17]: https://towardsdatascience.com/gentle-dive-into-math-behind-convolutional-neural-networks-79a07dd44cf9
