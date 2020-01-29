@@ -10,6 +10,7 @@ cd ..
 
 # Setup virtual env
 sudo apt-get update
+sudo apt-get install unzip
 sudo apt-get install python-dev
 sudo apt-get install python-pip
 sudo apt-get install python3-venv
@@ -20,7 +21,8 @@ pip3 install --upgrade setuptools
 pip3 install Cython
 pip3 install numpy
 pip3 install Pillow
-pip3 install -r requirements.txt     
+pip3 install -r requirements.txt
+pip3 install torchvision   
 deactivate
 
 echo "*****************************************************************************"
