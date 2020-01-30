@@ -107,7 +107,7 @@ As I worked on the last article, I had the opportunity to create my own neural n
 </p>
 
 ## Simple Method of Creating Animated Graphs
-[Medium articule][4] - [Source code](./02_data_science_toolkit/01_animated_graphs/])
+[Medium articule][4] - [Source code](./02_data_science_toolkit/01_animated_graphs/)
 
 Both in my articles and projects I try to create interesting visualizations, which very often allow me to communicate my ideas much more effectively. I decided to create a short tutorial to show you how to easily create animated visualizations using Matplotlib. I also encourage you to read my post where I described, among other things, how to create a visualization of neural network learning process.
 
@@ -120,7 +120,7 @@ Both in my articles and projects I try to create interesting visualizations, whi
 </p>
 
 ## Gentle Dive into Math Behind Convolutional Neural Networks
-[Medium articule][17] - [Source code](./01_mysteries_of_neural_networks/05_mathematics_of_cnn/])
+[Medium articule][17] - [Source code](./01_mysteries_of_neural_networks/05_mathematics_of_cnn/)
 
 In this post on Medium I focused on the theoretical issues related to CNNs. It is a preparation for the upcoming mini project, which aims to create my own, simple implementation of this type of the Neural Network. As a result, this section of the repository is quite narrow and includes mainly simple visualizations of the effects of a convolution with a selected filter.
 
@@ -133,7 +133,7 @@ In this post on Medium I focused on the theoretical issues related to CNNs. It i
 </p>
 
 ## Chess, rolls or basketball? Let's create a custom object detection model
-Medium articule - [Source code](./02_data_science_toolkit/02_yolo_object_detection/])
+Medium articule - [Source code](./02_data_science_toolkit/02_yolo_object_detection)
 
 My posts on the Medium are usually very theoretical - I tend to analyse and describe the algorithms that define how Neural Networks work. This time, however, I decided to break this trend and show my readers how easy it is to train your own YOLO model, capable of detecting any objects we choose. In order to achieve this goal, we will need help from a very useful and easy-to-use [implementation of YOLO][18]. In short, not much coding, but a huge effect. 
 
@@ -143,14 +143,6 @@ My posts on the Medium are usually very theoretical - I tend to analyse and desc
 
 <p align="center"> 
     <b>Figure 10.</b> Detection of players moving around the basketball court, </br> based on <a href="https://research.google.com/youtube8m/">YouTube-8M</a> dataset.
-</p>
-
-<p align="center"> 
-    <img width="500" src="./02_data_science_toolkit/02_yolo_object_detection/visualizations/object_detection_rolls.gif" alt="Convolution">
-</p>
-
-<p align="center"> 
-    <b>Figure 11.</b> Roll's detection using TinyYOLO.
 </p>
 
 ## License
