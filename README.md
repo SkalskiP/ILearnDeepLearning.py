@@ -132,6 +132,27 @@ In this post on Medium I focused on the theoretical issues related to CNNs. It i
     <b>Figure 9.</b> Convolutionary effect with selected filters.
 </p>
 
+## Chess, rolls or basketball? Let's create a custom object detection model
+Medium articule - [Source code](./02_data_science_toolkit/02_yolo_object_detection/])
+
+My posts on the Medium are usually very theoretical - I tend to analyse and describe the algorithms that define how Neural Networks work. This time, however, I decided to break this trend and show my readers how easy it is to train your own YOLO model, capable of detecting any objects we choose. In order to achieve this goal, we will need help from a very useful and easy-to-use [implementation of YOLO][18]. In short, not much coding, but a huge effect. 
+
+<p align="center"> 
+    <img width="500" src="./02_data_science_toolkit/02_yolo_object_detection/visualizations/object_detection_basketball.gif" alt="Convolution">
+</p>
+
+<p align="center"> 
+    <b>Figure 10.</b> Detection of players moving around the basketball court, </br> based on <a href="https://research.google.com/youtube8m/">YouTube-8M</a> dataset.
+</p>
+
+<p align="center"> 
+    <img width="500" src="./02_data_science_toolkit/02_yolo_object_detection/visualizations/object_detection_rolls.gif" alt="Convolution">
+</p>
+
+<p align="center"> 
+    <b>Figure 11.</b> Roll's detection using TinyYOLO.
+</p>
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md][6] file for details
@@ -167,3 +188,4 @@ This is a place where I collect links to interesting articles and papers, which 
 [15]: https://deepnotes.io/softmax-crossentropy
 [16]: https://towardsdatascience.com/how-to-train-neural-network-faster-with-optimizers-d297730b3713
 [17]: https://towardsdatascience.com/gentle-dive-into-math-behind-convolutional-neural-networks-79a07dd44cf9
+[18]: https://github.com/ultralytics/yolov3
