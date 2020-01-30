@@ -4,9 +4,8 @@
 git clone https://github.com/ultralytics/yolov3.git
 
 # Getting pre-trained weights
-cd ./yolov3/weights
-sh download_yolov3_weights.sh
-cd ..
+cd ./yolov3
+sh weights/download_yolov3_weights.sh
 
 # Setup virtual env
 sudo apt-get update
@@ -20,7 +19,7 @@ pip3 install --upgrade pip
 pip3 install --upgrade setuptools
 pip3 install Cython
 pip3 install numpy
-pip3 install Pillow
+pip3 install "pillow<7"
 pip3 install -r requirements.txt
 pip3 install torchvision   
 deactivate
