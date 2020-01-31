@@ -96,7 +96,7 @@ cd yolov3
 python3 train.py \
   --data data/chess.data \
   --cfg cfg/chess.cfg \
-  --weights weights/yolo3.pt
+  --weights weights/yolo3.pt \
   --epochs 100
 ```
 
