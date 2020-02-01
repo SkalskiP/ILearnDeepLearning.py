@@ -133,7 +133,7 @@ In this post on Medium I focused on the theoretical issues related to CNNs. It i
 </p>
 
 ## Chess, rolls or basketball? Let's create a custom object detection model
-Medium articule - [Source code](./02_data_science_toolkit/02_yolo_object_detection)
+[Medium articule][19] - [Source code](./02_data_science_toolkit/02_yolo_object_detection)
 
 My posts on the Medium are usually very theoretical - I tend to analyse and describe the algorithms that define how Neural Networks work. This time, however, I decided to break this trend and show my readers how easy it is to train your own YOLO model, capable of detecting any objects we choose. In order to achieve this goal, we will need help from a very useful and easy-to-use [implementation of YOLO][18]. In short, not much coding, but a huge effect. 
 
@@ -181,3 +181,4 @@ This is a place where I collect links to interesting articles and papers, which 
 [16]: https://towardsdatascience.com/how-to-train-neural-network-faster-with-optimizers-d297730b3713
 [17]: https://towardsdatascience.com/gentle-dive-into-math-behind-convolutional-neural-networks-79a07dd44cf9
 [18]: https://github.com/ultralytics/yolov3
+[19]: https://towardsdatascience.com/chess-rolls-or-basketball-lets-create-a-custom-object-detection-model-ef53028eac7d
