@@ -1,4 +1,21 @@
-.idea/*
-**/data
-.env/*
+# Notebook data files
+notebooks/*.pkl
+notebooks/*.tsv
+# Jupyter checkpoints
 **/.ipynb_checkpoints
+
+# PyCharm and mac and azure ml and VS Code files
+.idea
+.DS_Store
+.azureml
+.vscode
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+**/data
+**/dataset
+**/.env
