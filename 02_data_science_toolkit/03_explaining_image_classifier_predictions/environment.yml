@@ -12,5 +12,6 @@ dependencies:
   - scikit-image=0.15.0
   - eli5=0.10.1
   - lime=0.1.1.30
+  - shap=0.34.0
   - pip:
     - image-classifiers==0.2.2
