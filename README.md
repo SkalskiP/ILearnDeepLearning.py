@@ -145,6 +145,19 @@ My posts on the Medium are usually very theoretical - I tend to analyse and desc
     <b>Figure 10.</b> Detection of players moving around the basketball court, </br> based on <a href="https://research.google.com/youtube8m/">YouTube-8M</a> dataset.
 </p>
 
+## Knowing What and Why? - Explaining Image Classifier Predictions
+Medium articule - [Source code](./02_data_science_toolkit/03_explaining_image_classifier_predictions)
+
+As we implement highly responsible Computer Vision systems, it is becoming progressively clear that we must provide not only predictions but also explanations, as to what influenced its decision. In this post, I compared and benchmarked the most commonly used libraries for explaining the model predictions in the field of Image Classification - [Eli5][19], [LIME][20], and [SHAP][21]. I investigated the algorithms that they leverage, as well as compared the efficiency and quality of the provided explanations.
+
+<p align="center"> 
+    <img width="500" src="./02_data_science_toolkit/03_explaining_image_classifier_predictions/01_coco_res_net/viz/explaining_images.gif" alt="Explaining predictions">
+</p>
+
+<p align="center"> 
+    <b>Figure 11.</b> Comparison of explanations provided by ELI5, LIME and SHAP
+</p>
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md][6] file for details
@@ -182,3 +195,6 @@ This is a place where I collect links to interesting articles and papers, which 
 [17]: https://towardsdatascience.com/gentle-dive-into-math-behind-convolutional-neural-networks-79a07dd44cf9
 [18]: https://github.com/ultralytics/yolov3
 [19]: https://towardsdatascience.com/chess-rolls-or-basketball-lets-create-a-custom-object-detection-model-ef53028eac7d
+[20]: https://github.com/TeamHG-Memex/eli5
+[21]: https://github.com/marcotcr/lime
+[22]: https://github.com/slundberg/shap
