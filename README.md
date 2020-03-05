@@ -146,7 +146,7 @@ My posts on the Medium are usually very theoretical - I tend to analyse and desc
 </p>
 
 ## Knowing What and Why? - Explaining Image Classifier Predictions
-Medium articule - [Source code](./02_data_science_toolkit/03_explaining_image_classifier_predictions)
+[Medium articule][23] - [Source code](./02_data_science_toolkit/03_explaining_image_classifier_predictions)
 
 As we implement highly responsible Computer Vision systems, it is becoming progressively clear that we must provide not only predictions but also explanations, as to what influenced its decision. In this post, I compared and benchmarked the most commonly used libraries for explaining the model predictions in the field of Image Classification - [Eli5][19], [LIME][20], and [SHAP][21]. I investigated the algorithms that they leverage, as well as compared the efficiency and quality of the provided explanations.
 
@@ -198,3 +198,4 @@ This is a place where I collect links to interesting articles and papers, which 
 [20]: https://github.com/TeamHG-Memex/eli5
 [21]: https://github.com/marcotcr/lime
 [22]: https://github.com/slundberg/shap
+[23]: https://towardsdatascience.com/knowing-what-and-why-explaining-image-classifier-predictions-680a15043bad
