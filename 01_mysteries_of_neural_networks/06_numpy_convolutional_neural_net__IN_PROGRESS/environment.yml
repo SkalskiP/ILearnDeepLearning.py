@@ -8,6 +8,7 @@ dependencies:
   - pandas=1.0.0
   - matplotlib=3.1.3
   - jupyter=1.0.0
-  - tensorflow=1.15.0
   - seaborn=0.10.0
   - scikit-learn=0.22.1
+  - pip:
+      - tensorflow==2.0.0
