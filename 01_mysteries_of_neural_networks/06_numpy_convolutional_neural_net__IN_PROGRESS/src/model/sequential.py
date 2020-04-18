@@ -25,14 +25,18 @@ class SequentialModel:
             layer.update(lr=lr)
 
     def train(self, X: np.array, y: np.array, epochs: int, lr: float) -> np.array:
+        print(y)
         for epoch in range(epochs):
             y_hat = self.forward(X)
-            activation = - (np.divide(y, y_hat) - np.divide(1 - y, 1 - y_hat))
+            # activation = - (np.divide(y, y_hat + eps) - np.divide(1 - y, 1 - y_hat + eps))
+
+            activation = y_hat - y
+
             self.backward(activation)
             self.update(lr=lr)
 
             accuracy = get_accuracy_value(y_hat, y)
-            print(accuracy)
+            print("accuracy:", accuracy)
 
     def predict(self, X: np.array) -> np.array:
         return self.forward(X)
