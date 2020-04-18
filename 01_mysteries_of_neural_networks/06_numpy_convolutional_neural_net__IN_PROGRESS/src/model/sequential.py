@@ -2,6 +2,7 @@ from typing import List
 import numpy as np
 
 from src.base import Layer
+from src.utils.core import softmax
 from src.utils.metrics import get_accuracy_value
 
 
@@ -25,12 +26,19 @@ class SequentialModel:
             layer.update(lr=lr)
 
     def train(self, X: np.array, y: np.array, epochs: int, lr: float) -> np.array:
-        print(y)
+        print(y.shape)
         for epoch in range(epochs):
             y_hat = self.forward(X)
+
+            # eps = 0.000000001
             # activation = - (np.divide(y, y_hat + eps) - np.divide(1 - y, 1 - y_hat + eps))
 
-            activation = y_hat - y
+            # activation = y_hat - y
+
+            # multi class cross entropy
+            # epsilon=1e-12
+            # y_hat = np.clip(y_hat, epsilon, 1. - epsilon)
+            activation = softmax(y_hat) - y
 
             self.backward(activation)
             self.update(lr=lr)
