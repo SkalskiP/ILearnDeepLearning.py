@@ -5,7 +5,7 @@ from src.base import Layer
 from src.utils.metrics import get_accuracy_value
 
 
-class Sequential:
+class SequentialModel:
     def __init__(self, layers: List[Layer]):
         self._layers = layers
 
@@ -15,11 +15,10 @@ class Sequential:
             activation = layer.forward_pass(activation=activation)
         return activation
 
-    def backward(self, input: np.array) -> np.array:
+    def backward(self, input: np.array) -> None:
         activation = input
-        for layer in self._layers:
+        for layer in reversed(self._layers):
             activation = layer.backward_pass(activation=activation)
-        return activation
 
     def update(self, lr: float) -> None:
         for layer in self._layers:

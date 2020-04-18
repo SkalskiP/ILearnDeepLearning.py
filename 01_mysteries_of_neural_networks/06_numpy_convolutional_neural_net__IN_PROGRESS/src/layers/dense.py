@@ -14,7 +14,7 @@ class DenseLayer(Layer):
     def initialize(cls, input_dim: int, output_dim: int) -> DenseLayer:
         W = np.random.randn(output_dim, input_dim) * 0.1
         b = np.random.randn(output_dim, 1) * 0.1
-        cls(W=W, b=b)
+        return cls(W=W, b=b)
 
     def forward_pass(self, activation: np.array) -> np.array:
         self._Z = np.dot(self._W, activation) + self._b
