@@ -3,7 +3,7 @@ import numpy as np
 
 from src.base import Layer
 from src.utils.core import softmax
-from src.utils.metrics import get_accuracy_value
+from src.utils.metrics import get_accuracy_value, multi_class_cross_entropy_loss
 
 
 class SequentialModel:
@@ -26,7 +26,7 @@ class SequentialModel:
             layer.update(lr=lr)
 
     def train(self, X: np.array, y: np.array, epochs: int, lr: float) -> np.array:
-        print(y.shape)
+
         for epoch in range(epochs):
             y_hat = self.forward(X)
 
@@ -35,16 +35,16 @@ class SequentialModel:
 
             # activation = y_hat - y
 
-            # multi class cross entropy
-            # epsilon=1e-12
-            # y_hat = np.clip(y_hat, epsilon, 1. - epsilon)
             activation = softmax(y_hat) - y
 
             self.backward(activation)
             self.update(lr=lr)
 
-            accuracy = get_accuracy_value(y_hat, y)
-            print("accuracy:", accuracy)
+            if epoch % 100 == 0:
+                accuracy = get_accuracy_value(y_hat, y)
+                loss = multi_class_cross_entropy_loss(y_hat, y)
+                print("Iteration: {:05} - cost: {:.5f} - accuracy: {:.5f}"
+                      .format(epoch, loss, accuracy))
 
     def predict(self, X: np.array) -> np.array:
         return self.forward(X)
