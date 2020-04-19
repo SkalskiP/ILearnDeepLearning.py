@@ -2,7 +2,7 @@ from typing import List, Tuple
 import numpy as np
 
 from src.base import Layer
-from src.utils.core import softmax
+from src.utils.core import softmax, generate_batches
 from src.utils.metrics import calculate_accuracy, multi_class_cross_entropy_loss
 
 
@@ -33,24 +33,30 @@ class SequentialModel:
         y_batch = y[:, batch_idx * batch_size: (batch_idx + 1) * batch_size]
         return X_batch, y_batch
 
-    def train(self, X: np.array, y: np.array, epochs: int, lr: float,
-              batch_size=64) -> np.array:
+    def train(
+        self,
+        x_train: np.array,
+        y_train: np.array,
+        x_test: np.array,
+        y_test: np.array,
+        epochs: int,
+        lr: float,
+        batch_size=64
+    ) -> np.array:
 
         for epoch in range(epochs + 1):
-            X_batch, y_batch = self._get_batch(X, y, epoch, batch_size)
+            for X_batch, y_batch in generate_batches(x_train, y_train, batch_size):
+                y_hat = self.forward(X_batch)
+                activation = softmax(y_hat) - y_batch
+                self.backward(activation)
+                self.update(lr=lr)
 
-            y_hat = self.forward(X_batch)
-
-            activation = softmax(y_hat) - y_batch
-
-            self.backward(activation)
-            self.update(lr=lr)
-
-            if epoch % 1000 == 0:
-                accuracy = calculate_accuracy(y_hat, y_batch)
-                loss = multi_class_cross_entropy_loss(y_hat, y_batch)
+            if epoch % 10 == 0:
+                y_hat = self.forward(x_test)
+                accuracy = calculate_accuracy(y_hat, y_test)
+                loss = multi_class_cross_entropy_loss(y_hat, y_test)
                 print("Iteration: {:05} - cost: {:.5f} - accuracy: {:.5f}"
                       .format(epoch, loss, accuracy))
 
-    def predict(self, X: np.array) -> np.array:
-        return self.forward(X)
+    def predict(self, x: np.array) -> np.array:
+        return self.forward(x)
