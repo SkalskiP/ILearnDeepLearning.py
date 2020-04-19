@@ -35,8 +35,6 @@ class SequentialModel:
 
     def train(self, X: np.array, y: np.array, epochs: int, lr: float,
               batch_size=64) -> np.array:
-        print("X_shape", X.shape)
-        print("y_shape", y.shape)
 
         for epoch in range(epochs + 1):
             X_batch, y_batch = self._get_batch(X, y, epoch, batch_size)
