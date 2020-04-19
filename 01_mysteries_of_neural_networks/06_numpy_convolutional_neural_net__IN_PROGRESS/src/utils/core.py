@@ -13,6 +13,16 @@ def convert_categorical2one_hot(y: np.array) -> np.array:
     return one_hot_matrix
 
 
+def convert_prob2categorical(probs: np.array) -> np.array:
+    """
+    k - number of classes
+    N - number of instances
+    :param probs - softmax output array with (k, N) shape
+    :return categorical array with (N, ) shape
+    """
+    return np.argmax(probs, axis=0)
+
+
 def convert_prob2one_hot(probs: np.array) -> np.array:
     """
     k - number of classes
@@ -20,7 +30,7 @@ def convert_prob2one_hot(probs: np.array) -> np.array:
     :param probs - softmax output array with (k, N) shape
     :return one hot array with (k, N) shape
     """
-    class_idx = np.argmax(probs, axis=0)
+    class_idx = convert_prob2categorical(probs)
     one_hot_matrix = np.zeros(probs.shape)
     one_hot_matrix[class_idx, np.arange(probs.shape[1])] = 1
     return one_hot_matrix
