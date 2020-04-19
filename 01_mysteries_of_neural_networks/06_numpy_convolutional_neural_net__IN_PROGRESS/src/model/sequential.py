@@ -3,7 +3,7 @@ import numpy as np
 
 from src.base import Layer
 from src.utils.core import softmax
-from src.utils.metrics import get_accuracy_value, multi_class_cross_entropy_loss
+from src.utils.metrics import calculate_accuracy, multi_class_cross_entropy_loss
 
 
 class SequentialModel:
@@ -49,7 +49,7 @@ class SequentialModel:
             self.update(lr=lr)
 
             if epoch % 1000 == 0:
-                accuracy = get_accuracy_value(y_hat, y_batch)
+                accuracy = calculate_accuracy(y_hat, y_batch)
                 loss = multi_class_cross_entropy_loss(y_hat, y_batch)
                 print("Iteration: {:05} - cost: {:.5f} - accuracy: {:.5f}"
                       .format(epoch, loss, accuracy))

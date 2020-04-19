@@ -1,16 +1,17 @@
 import numpy as np
 
-
-def convert_prob_into_class(probs: np.array) -> np.array:
-    probs_ = np.copy(probs)
-    probs_[probs_ > 0.5] = 1
-    probs_[probs_ <= 0.5] = 0
-    return probs_
+from src.utils.core import convert_prob2one_hot
 
 
-def get_accuracy_value(Y_hat: np.array, Y: np.array) -> float:
-    Y_hat_ = convert_prob_into_class(Y_hat)
-    return (Y_hat_ == Y).all(axis=0).mean()
+def calculate_accuracy(y_hat: np.array, y: np.array) -> float:
+    """
+    k - number of classes
+    N - number of instances
+    :param y_hat - softmax output array with (k, N) shape
+    :param y - one hot ground truth array with (k, N) shape
+    """
+    y_hat = convert_prob2one_hot(y_hat)
+    return (y_hat == y).all(axis=0).mean()
 
 
 def multi_class_cross_entropy_loss(Y_hat, Y, eps=1e-12) -> float:
