@@ -17,13 +17,11 @@ class DenseLayer(Layer):
         return cls(W=W, b=b)
 
     def forward_pass(self, activation: np.array) -> np.array:
-        # print(f"DenseLayer - forward_pass - activation max: {np.max(activation)} min: {np.min(activation)}")
         self._Z = np.dot(self._W, activation) + self._b
         self._A = np.array(activation, copy=True)
         return self._Z
 
     def backward_pass(self, activation: np.array) -> np.array:
-        # print(f"DenseLayer - backward_pass - activation shape: {activation}")
         m = self._A.shape[1]
         self._dW = np.dot(activation, self._A.T) / m
         self._db = np.sum(activation, axis=1, keepdims=True) / m
