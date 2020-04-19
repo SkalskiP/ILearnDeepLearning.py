@@ -2,7 +2,7 @@ from typing import List, Tuple
 import numpy as np
 
 from src.base import Layer
-from src.utils.core import softmax, generate_batches
+from src.utils.core import generate_batches
 from src.utils.metrics import calculate_accuracy, multi_class_cross_entropy_loss
 
 
@@ -47,7 +47,7 @@ class SequentialModel:
         for epoch in range(epochs + 1):
             for X_batch, y_batch in generate_batches(x_train, y_train, batch_size):
                 y_hat = self.forward(X_batch)
-                activation = softmax(y_hat) - y_batch
+                activation = y_hat - y_batch
                 self.backward(activation)
                 self.update(lr=lr)
 

@@ -1,5 +1,3 @@
-from typing import Tuple
-
 import numpy as np
 
 
@@ -44,8 +42,3 @@ def generate_batches(x: np.array, y: np.array, batch_size: int):
                 i, min(i + batch_size, y.shape[-1])), axis=len(y.shape) - 1)
         )
 
-
-def softmax(y: np.array) -> np.array:
-    # Column wise softmax
-    e_y = np.exp(y - np.max(y))
-    return e_y / e_y.sum(axis=0)
