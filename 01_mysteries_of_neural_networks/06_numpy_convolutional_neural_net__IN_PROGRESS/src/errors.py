@@ -1,0 +1,2 @@
+class InvalidPaddingModeError(Exception):
+    pass
