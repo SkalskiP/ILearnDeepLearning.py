@@ -6,7 +6,7 @@ from src.utils.core import convert_prob2one_hot
 def calculate_accuracy(y_hat: np.array, y: np.array) -> float:
     """
     k - number of classes
-    N - number of instances
+    N - number of items
     :param y_hat - softmax output array with (k, N) shape
     :param y - one hot ground truth array with (k, N) shape
     """

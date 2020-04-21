@@ -4,7 +4,7 @@ import numpy as np
 def convert_categorical2one_hot(y: np.array) -> np.array:
     """
     k - number of classes
-    N - number of instances
+    N - number of items
     :param y - categorical array with (N, 1) shape
     :return one hot array with (N, k) shape
     """
@@ -16,7 +16,7 @@ def convert_categorical2one_hot(y: np.array) -> np.array:
 def convert_prob2categorical(probs: np.array) -> np.array:
     """
     k - number of classes
-    N - number of instances
+    N - number of items
     :param probs - softmax output array with (k, N) shape
     :return categorical array with (N, ) shape
     """
@@ -26,7 +26,7 @@ def convert_prob2categorical(probs: np.array) -> np.array:
 def convert_prob2one_hot(probs: np.array) -> np.array:
     """
     k - number of classes
-    N - number of instances
+    N - number of items
     :param probs - softmax output array with (k, N) shape
     :return one hot array with (k, N) shape
     """
@@ -39,7 +39,7 @@ def convert_prob2one_hot(probs: np.array) -> np.array:
 def generate_batches(x: np.array, y: np.array, batch_size: int):
     """
     k - number of classes
-    N - number of instances
+    N - number of items
     :param x - features array with (..., N) shape
     :param y - one hot ground truth array with (k, N) shape
     :batch_size - number of elements in single batch
