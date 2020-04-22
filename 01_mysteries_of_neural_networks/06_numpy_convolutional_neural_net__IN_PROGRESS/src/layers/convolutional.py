@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from typing import Tuple
 
-from src.base import Layer
 import numpy as np
 
+from src.base import Layer
 from src.errors import InvalidPaddingModeError
 
 
@@ -53,7 +53,7 @@ class ConvLayer2D(Layer):
 
         Z = np.zeros(shape=output_shape)
 
-        activation = ConvLayer2D.pad_activation(
+        activation_pad = ConvLayer2D.pad_activation(
             activation=activation,
             fd=fd,
             mode=self._padding
@@ -66,7 +66,7 @@ class ConvLayer2D(Layer):
                     for c in range(channels):
                         filter_W = self._W[c, :, :, :]
                         filter_b = self._b[c]
-                        activation_slice = activation[h:h+fd, w:w+fd, :, i]
+                        activation_slice = activation_pad[h:h+fd, w:w+fd, :, i]
                         Z[h, w, c, i] = ConvLayer2D.single_convolution_step(
                             activation_slice=activation_slice,
                             filter_W=filter_W,
@@ -75,7 +75,38 @@ class ConvLayer2D(Layer):
         return Z
 
     def backward_pass(self, activation: np.array) -> np.array:
-        pass
+        # TODO: Backward initial implementation
+        _, fd, _, _ = self._W.shape
+        ad, _, _, _ = self._A.shape
+
+        self._dW = np.zeros_like(self._W)
+        self._db = np.zeros_like(self._b)
+        dA = np.zeros_like(self._A)
+
+        A_pad = ConvLayer2D.pad_activation(
+            activation=self._A,
+            fd=fd,
+            mode=self._padding
+        )
+
+        ad_pad, _, _, _ = A_pad.shape
+        pad = (ad_pad - ad) // 2
+
+        dA_pad = np.zeros_like(A_pad)
+
+        height, width, channels, items = self._A.shape
+
+        for i in range(items):
+            for c in range(channels):
+                self._b[c] = activation[:, :, c, i].sum()
+                for h in range(height + 2 * pad - fd + 1):
+                    for w in range(width + 2 * pad - fd + 1):
+                        A_pad_slice = A_pad[h:h+fd, w:w+fd, :, i]
+                        self._dW[c, :, :, :] = A_pad_slice * activation[h, w, c, i]
+                        dA_pad[h:h+fd, w:w+fd, :, i] += self._W[c, :, :, :] * activation[h, w, c, i]
+            dA[:, :, :, i] = dA_pad[pad:pad+ad, pad:pad+ad, :, i]
+
+        return dA
 
     def update(self, lr: float) -> None:
         self._W -= lr * self._dW

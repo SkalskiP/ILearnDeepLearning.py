@@ -45,6 +45,7 @@ class SequentialModel:
     ) -> np.array:
 
         for epoch in range(epochs + 1):
+            print(epoch)
             for X_batch, y_batch in generate_batches(x_train, y_train, batch_size):
                 y_hat = self.forward(X_batch)
                 activation = y_hat - y_batch
