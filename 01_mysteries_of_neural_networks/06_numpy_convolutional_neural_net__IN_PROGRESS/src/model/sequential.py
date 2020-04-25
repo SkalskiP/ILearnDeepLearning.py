@@ -1,5 +1,6 @@
 from typing import List, Tuple
 import numpy as np
+import math
 
 from src.base import Layer
 from src.utils.core import generate_batches
@@ -45,19 +46,19 @@ class SequentialModel:
     ) -> np.array:
 
         for epoch in range(epochs + 1):
-            print(epoch)
-            for X_batch, y_batch in generate_batches(x_train, y_train, batch_size):
+            batch_count = math.ceil(x_train.shape[-1] / batch_size)
+            for batch_idx, (X_batch, y_batch) in enumerate(generate_batches(x_train, y_train, batch_size)):
+                print("Iteration: {:03}/{:03} - Batch: {:03}/{:03}".format(epoch, epochs, batch_idx, batch_count))
                 y_hat = self.forward(X_batch)
                 activation = y_hat - y_batch
                 self.backward(activation)
                 self.update(lr=lr)
 
-            if epoch % 10 == 0:
-                y_hat = self.forward(x_test)
-                accuracy = calculate_accuracy(y_hat, y_test)
-                loss = multi_class_cross_entropy_loss(y_hat, y_test)
-                print("Iteration: {:05} - cost: {:.5f} - accuracy: {:.5f}"
-                      .format(epoch, loss, accuracy))
+            y_hat = self.forward(x_test)
+            accuracy = calculate_accuracy(y_hat, y_test)
+            loss = multi_class_cross_entropy_loss(y_hat, y_test)
+            print("Iteration: {:05} - cost: {:.5f} - accuracy: {:.5f}"
+                  .format(epoch, loss, accuracy))
 
     def predict(self, x: np.array) -> np.array:
         return self.forward(x)
