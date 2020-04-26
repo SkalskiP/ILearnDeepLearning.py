@@ -1,10 +1,20 @@
 from __future__ import annotations
+
+from typing import Optional, Tuple
+
 from src.base import Layer
 import numpy as np
 
 
 class DenseLayer(Layer):
     def __init__(self, w: np.array, b: np.array):
+        """
+        :param w - 2D weights tensor with shape (units_curr, units_prev)
+        :param b - 1D bias tensor with shape (1, units_curr)
+        ------------------------------------------------------------------------
+        units_prev - number of units in previous layer
+        units_curr -  number of units in current layer
+        """
         self._w, self._b = w, b
         self._dw, self._db = None, None
         self._a_prev = None
@@ -18,6 +28,16 @@ class DenseLayer(Layer):
         w = np.random.randn(units_curr, units_prev) * 0.1
         b = np.random.randn(1, units_curr) * 0.1
         return cls(w=w, b=b)
+
+    @property
+    def weights(self) -> Optional[Tuple[np.array, np.array]]:
+        return self._w, self._b
+
+    @property
+    def gradients(self) -> Optional[Tuple[np.array, np.array]]:
+        if self._dw is None or self._db is None:
+            return None
+        return self._dw, self._db
 
     def forward_pass(self, a_prev: np.array) -> np.array:
         """
@@ -45,9 +65,13 @@ class DenseLayer(Layer):
         self._db = np.sum(da_curr, axis=0, keepdims=True) / n
         return np.dot(da_curr, self._w)
 
-    def update(self, lr: float) -> None:
+    def set_wights(self, w: np.array, b: np.array) -> None:
         """
-        :param lr -learning rate
+        :param w - 2D weights tensor with shape (units_curr, units_prev)
+        :param b - 1D bias tensor with shape (1, units_curr)
+        ------------------------------------------------------------------------
+        units_prev - number of units in previous layer
+        units_curr -  number of units in current layer
         """
-        self._w -= lr * self._dw
-        self._b -= lr * self._db
+        self._w = w
+        self._b = b

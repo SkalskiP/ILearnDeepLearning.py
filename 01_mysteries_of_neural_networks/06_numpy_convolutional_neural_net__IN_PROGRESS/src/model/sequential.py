@@ -1,14 +1,15 @@
 from typing import List
 import numpy as np
 
-from src.base import Layer
+from src.base import Layer, Optimizer
 from src.utils.core import generate_batches
 from src.utils.metrics import calculate_accuracy, multi_class_cross_entropy_loss
 
 
 class SequentialModel:
-    def __init__(self, layers: List[Layer]):
+    def __init__(self, layers: List[Layer], optimizer: Optimizer):
         self._layers = layers
+        self._optimizer = optimizer
 
     def forward(self, input: np.array) -> np.array:
         activation = input
@@ -21,9 +22,8 @@ class SequentialModel:
         for layer in reversed(self._layers):
             activation = layer.backward_pass(da_curr=activation)
 
-    def update(self, lr: float) -> None:
-        for layer in self._layers:
-            layer.update(lr=lr)
+    def update(self) -> None:
+        self._optimizer.update(layers=self._layers)
 
     def train(
         self,
@@ -32,17 +32,16 @@ class SequentialModel:
         x_test: np.array,
         y_test: np.array,
         epochs: int,
-        lr: float,
         batch_size: int = 64,
         test_frequency: int = 10
     ) -> np.array:
 
         for epoch in range(epochs):
-            for batch_idx, (X_batch, y_batch) in enumerate(generate_batches(x_train, y_train, batch_size)):
-                y_hat = self.forward(X_batch)
+            for x_batch, y_batch in generate_batches(x_train, y_train, batch_size):
+                y_hat = self.forward(x_batch)
                 activation = y_hat - y_batch
                 self.backward(activation)
-                self.update(lr=lr)
+                self.update()
 
             if (epoch + 1) % test_frequency == 0:
                 y_hat = self.forward(x_test)

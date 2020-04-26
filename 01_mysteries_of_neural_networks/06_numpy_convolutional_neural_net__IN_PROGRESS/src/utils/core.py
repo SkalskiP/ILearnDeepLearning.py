@@ -45,7 +45,7 @@ def generate_batches(x: np.array, y: np.array, batch_size: int):
     :param y - one hot ground truth array with (N, k) shape
     :batch_size - number of elements in single batch
     """
-    for i in range(0, x.shape[-1], batch_size):
+    for i in range(0, x.shape[0], batch_size):
         yield (
             x.take(indices=range(
                 i, min(i + batch_size, x.shape[0])), axis=0),
