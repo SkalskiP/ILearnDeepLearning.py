@@ -7,29 +7,29 @@ class TestFlattenLayer:
 
     def test_flatten_forward_pass_with_tree_axis(self):
         # given
-        activation = np.random.rand(28, 28, 100)
+        activation = np.random.rand(100, 28, 28)
 
         # when
         flatten_layer = FlattenLayer()
         result = flatten_layer.forward_pass(activation)
 
         # then
-        assert result.shape == (28 * 28, 100)
+        assert result.shape == (100, 28 * 28)
 
     def test_flatten_forward_pass_with_four_axis(self):
         # given
-        activation = np.random.rand(28, 28, 3, 100)
+        activation = np.random.rand(100, 28, 28, 3)
 
         # when
         flatten_layer = FlattenLayer()
         result = flatten_layer.forward_pass(activation)
 
         # then
-        assert result.shape == (28 * 28 * 3, 100)
+        assert result.shape == (100, 28 * 28 * 3)
 
     def test_flatten_backward_pass_with_tree_axis(self):
         # given
-        activation = np.random.rand(28, 28, 100)
+        activation = np.random.rand(100, 28, 28)
 
         # when
         flatten_layer = FlattenLayer()
@@ -41,7 +41,7 @@ class TestFlattenLayer:
 
     def test_flatten_backward_pass_with_four_axis(self):
         # given
-        activation = np.random.rand(28, 28, 3, 100)
+        activation = np.random.rand(100, 28, 28, 3)
 
         # when
         flatten_layer = FlattenLayer()

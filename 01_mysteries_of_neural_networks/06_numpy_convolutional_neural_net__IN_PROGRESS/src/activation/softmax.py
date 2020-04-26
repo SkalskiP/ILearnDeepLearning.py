@@ -7,7 +7,7 @@ class SoftmaxLayer(Layer):
         self._z = None
 
     def forward_pass(self, a_prev: np.array) -> np.array:
-        e = np.exp(a_prev - a_prev.max())
+        e = np.exp(a_prev - a_prev.max(axis=1, keepdims=True))
         self._z = e / np.sum(e, axis=1, keepdims=True)
         return self._z
 
