@@ -1,6 +1,5 @@
-from typing import List, Tuple
+from typing import List
 import numpy as np
-import math
 
 from src.base import Layer
 from src.utils.core import generate_batches
@@ -14,25 +13,17 @@ class SequentialModel:
     def forward(self, input: np.array) -> np.array:
         activation = input
         for layer in self._layers:
-            activation = layer.forward_pass(activation=activation)
+            activation = layer.forward_pass(a_prev=activation)
         return activation
 
     def backward(self, input: np.array) -> None:
         activation = input
         for layer in reversed(self._layers):
-            activation = layer.backward_pass(activation=activation)
+            activation = layer.backward_pass(da_curr=activation)
 
     def update(self, lr: float) -> None:
         for layer in self._layers:
             layer.update(lr=lr)
-
-    def _get_batch(self, X: np.array, y: np.array, epoch: int, batch_size=64
-                   ) -> Tuple[np.array, np.array]:
-        batch_count = X.shape[1] // batch_size
-        batch_idx = epoch % batch_count
-        X_batch = X[:, batch_idx * batch_size: (batch_idx + 1) * batch_size]
-        y_batch = y[:, batch_idx * batch_size: (batch_idx + 1) * batch_size]
-        return X_batch, y_batch
 
     def train(
         self,
@@ -42,23 +33,23 @@ class SequentialModel:
         y_test: np.array,
         epochs: int,
         lr: float,
-        batch_size=64
+        batch_size: int = 64,
+        test_frequency: int = 10
     ) -> np.array:
 
-        for epoch in range(epochs + 1):
-            batch_count = math.ceil(x_train.shape[-1] / batch_size)
+        for epoch in range(epochs):
             for batch_idx, (X_batch, y_batch) in enumerate(generate_batches(x_train, y_train, batch_size)):
-                # print("Iteration: {:03}/{:03} - Batch: {:03}/{:03}".format(epoch, epochs, batch_idx, batch_count))
                 y_hat = self.forward(X_batch)
                 activation = y_hat - y_batch
                 self.backward(activation)
                 self.update(lr=lr)
 
-            y_hat = self.forward(x_test)
-            accuracy = calculate_accuracy(y_hat, y_test)
-            loss = multi_class_cross_entropy_loss(y_hat, y_test)
-            print("Iteration: {:05} - cost: {:.5f} - accuracy: {:.5f}"
-                  .format(epoch, loss, accuracy))
+            if (epoch + 1) % test_frequency == 0:
+                y_hat = self.forward(x_test)
+                accuracy = calculate_accuracy(y_hat, y_test)
+                loss = multi_class_cross_entropy_loss(y_hat, y_test)
+                print("Iteration: {:05} - cost: {:.5f} - accuracy: {:.5f}"
+                      .format(epoch+1, loss, accuracy))
 
     def predict(self, x: np.array) -> np.array:
         return self.forward(x)

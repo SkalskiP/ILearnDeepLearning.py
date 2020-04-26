@@ -4,13 +4,12 @@ import numpy as np
 
 class Layer(ABC):
     @abstractmethod
-    def forward_pass(self, activation: np.array) -> np.array:
+    def forward_pass(self, a_prev: np.array) -> np.array:
         pass
 
     @abstractmethod
-    def backward_pass(self, activation: np.array) -> np.array:
+    def backward_pass(self, da_curr: np.array) -> np.array:
         pass
 
-    @abstractmethod
     def update(self, lr: float) -> None:
         pass

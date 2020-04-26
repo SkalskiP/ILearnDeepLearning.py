@@ -4,16 +4,16 @@ import numpy as np
 
 class ReluLayer(Layer):
     def __init__(self):
-        self._Z = None
+        self._z = None
 
-    def forward_pass(self, activation: np.array) -> np.array:
-        self._Z = np.maximum(0, activation)
-        return self._Z
+    def forward_pass(self, a_prev: np.array) -> np.array:
+        self._z = np.maximum(0, a_prev)
+        return self._z
 
-    def backward_pass(self, activation: np.array) -> np.array:
-        dZ = np.array(activation, copy=True)
-        dZ[self._Z <= 0] = 0
-        return dZ
+    def backward_pass(self, da_curr: np.array) -> np.array:
+        dz = np.array(da_curr, copy=True)
+        dz[self._z <= 0] = 0
+        return dz
 
     def update(self, lr: float) -> None:
         pass
