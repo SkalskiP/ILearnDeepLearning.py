@@ -8,21 +8,21 @@ class TestMaxPoolLayer:
     def test_forward_pass_single_channel_single_item(self):
         # given
         pool_size = (2, 2)
-        strides = 2
-        activation = np.array([
-            [[[1]], [[2]], [[2]], [[1]]],
-            [[[3]], [[4]], [[0]], [[0]]],
-            [[[5]], [[2]], [[1]], [[1]]],
-            [[[3]], [[4]], [[0]], [[3]]]
-        ])
+        stride = 2
+        activation = np.array([[
+            [[1], [2], [2], [1]],
+            [[3], [4], [0], [0]],
+            [[5], [2], [1], [1]],
+            [[3], [4], [0], [3]]
+        ]])
 
-        expected_result = np.array([
-            [[[4]], [[2]]],
-            [[[5]], [[3]]],
-        ])
+        expected_result = np.array([[
+            [[4], [2]],
+            [[5], [3]],
+        ]])
 
         # when
-        layer = MaxPoolLayer(pool_size=pool_size, strides=strides)
+        layer = MaxPoolLayer(pool_size=pool_size, stride=stride)
         result = layer.forward_pass(activation)
 
         # then
@@ -31,7 +31,7 @@ class TestMaxPoolLayer:
     def test_forward_pass_two_channels_single_item(self):
         # given
         pool_size = (2, 2)
-        strides = 2
+        stride = 2
         activation = np.array([
             [
                 [[1], [5]],
@@ -71,7 +71,7 @@ class TestMaxPoolLayer:
         ])
 
         # when
-        layer = MaxPoolLayer(pool_size=pool_size, strides=strides)
+        layer = MaxPoolLayer(pool_size=pool_size, stride=stride)
         result = layer.forward_pass(activation)
 
         # then
@@ -80,7 +80,7 @@ class TestMaxPoolLayer:
     def test_forward_pass_single_channel_two_items(self):
         # given
         pool_size = (2, 2)
-        strides = 2
+        stride = 2
         activation = np.array([
             [
                 [[1, 5]],
@@ -120,7 +120,7 @@ class TestMaxPoolLayer:
         ])
 
         # when
-        layer = MaxPoolLayer(pool_size=pool_size, strides=strides)
+        layer = MaxPoolLayer(pool_size=pool_size, stride=stride)
         result = layer.forward_pass(activation)
 
         # then
@@ -129,7 +129,7 @@ class TestMaxPoolLayer:
     def test_backward_pass_single_channel_single_item(self):
         # given
         pool_size = (2, 2)
-        strides = 2
+        stride = 2
         forward_activation = np.array([
             [[[1]], [[2]], [[2]], [[1]]],
             [[[3]], [[4]], [[0]], [[0]]],
@@ -150,7 +150,7 @@ class TestMaxPoolLayer:
         ])
 
         # when
-        layer = MaxPoolLayer(pool_size=pool_size, strides=strides)
+        layer = MaxPoolLayer(pool_size=pool_size, stride=stride)
         _ = layer.forward_pass(forward_activation)
         backward_result = layer.backward_pass(backward_activation)
 
@@ -160,7 +160,7 @@ class TestMaxPoolLayer:
     def test_backward_pass_two_channels_single_item(self):
         # given
         pool_size = (2, 2)
-        strides = 2
+        stride = 2
         forward_activation = np.array([
             [
                 [[1], [5]],
@@ -227,7 +227,7 @@ class TestMaxPoolLayer:
         ])
 
         # when
-        layer = MaxPoolLayer(pool_size=pool_size, strides=strides)
+        layer = MaxPoolLayer(pool_size=pool_size, stride=stride)
         _ = layer.forward_pass(forward_activation)
         backward_result = layer.backward_pass(backward_activation)
 
@@ -237,7 +237,7 @@ class TestMaxPoolLayer:
     def test_backward_pass_single_channel_two_items(self):
         # given
         pool_size = (2, 2)
-        strides = 2
+        stride = 2
         forward_activation = np.array([
             [
                 [[1, 5]],
@@ -304,7 +304,7 @@ class TestMaxPoolLayer:
         ])
 
         # when
-        layer = MaxPoolLayer(pool_size=pool_size, strides=strides)
+        layer = MaxPoolLayer(pool_size=pool_size, stride=stride)
         _ = layer.forward_pass(forward_activation)
         backward_result = layer.backward_pass(backward_activation)
 
