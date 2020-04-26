@@ -7,13 +7,23 @@ class ReluLayer(Layer):
         self._z = None
 
     def forward_pass(self, a_prev: np.array) -> np.array:
+        """
+        :param a_prev - ND tensor with shape (n, ..., channels)
+        :output ND tensor with shape (n, ..., channels)
+        ------------------------------------------------------------------------
+        n - number of examples in batch
+        """
         self._z = np.maximum(0, a_prev)
         return self._z
 
     def backward_pass(self, da_curr: np.array) -> np.array:
+        """
+        :param da_curr - ND tensor with shape (n, ..., channels)
+        :output ND tensor with shape (n, ..., channels)
+        ------------------------------------------------------------------------
+        n - number of examples in batch
+        """
         dz = np.array(da_curr, copy=True)
         dz[self._z <= 0] = 0
         return dz
 
-    def update(self, lr: float) -> None:
-        pass

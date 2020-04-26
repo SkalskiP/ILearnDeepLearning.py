@@ -65,6 +65,3 @@ class MaxPoolLayer(Layer):
                         output[h_start:h_end, w_start:w_end, c, n][idx_h, idx_w] = activation[j, i, c, n]
         return output
 
-
-    def update(self, lr: float) -> None:
-        pass
