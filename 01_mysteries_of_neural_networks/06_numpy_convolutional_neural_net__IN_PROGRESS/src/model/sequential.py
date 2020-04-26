@@ -48,7 +48,7 @@ class SequentialModel:
         for epoch in range(epochs + 1):
             batch_count = math.ceil(x_train.shape[-1] / batch_size)
             for batch_idx, (X_batch, y_batch) in enumerate(generate_batches(x_train, y_train, batch_size)):
-                print("Iteration: {:03}/{:03} - Batch: {:03}/{:03}".format(epoch, epochs, batch_idx, batch_count))
+                # print("Iteration: {:03}/{:03} - Batch: {:03}/{:03}".format(epoch, epochs, batch_idx, batch_count))
                 y_hat = self.forward(X_batch)
                 activation = y_hat - y_batch
                 self.backward(activation)

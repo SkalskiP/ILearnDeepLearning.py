@@ -34,7 +34,7 @@ class ConvLayer2D(Layer):
         b = np.random.randn(filters) * 0.1
         return cls(W=W, b=b, padding=padding)
 
-    def forward_pass(self, activation: np.array) -> np.array:
+    def forward_pass_slow(self, activation: np.array) -> np.array:
         """
         N - number of items
         ad - activation dimension
@@ -74,8 +74,35 @@ class ConvLayer2D(Layer):
                         )
         return Z
 
+    def forward_pass(self, activation: np.array) -> np.array:
+        self._A = np.array(activation, copy=True)
+
+        _, fd, _, _ = self._W.shape
+
+        output_shape = ConvLayer2D.calculate_forward_pass_output_shape(
+            activation=activation,
+            W=self._W,
+            mode=self._padding
+        )
+
+        Z = np.zeros(shape=output_shape)
+
+        activation_pad = ConvLayer2D.pad_activation(
+            activation=activation,
+            fd=fd,
+            mode=self._padding
+        )
+
+        height, width, channels, items = output_shape
+
+        for h in range(height):
+            for w in range(width):
+                Z[h, w, :, :] = np.sum(
+                    activation_pad[np.newaxis, h:h+fd, w:w+fd, :, :] *
+                    self._W[:, :, :, :, np.newaxis], axis=(1, 2, 3))
+        return Z
+
     def backward_pass(self, activation: np.array) -> np.array:
-        # TODO: Backward initial implementation
         _, fd, _, _ = self._W.shape
         ad, _, _, _ = self._A.shape
 
@@ -98,7 +125,7 @@ class ConvLayer2D(Layer):
 
         for i in range(items):
             for c in range(channels):
-                self._b[c] = activation[:, :, c, i].sum()
+                self._b[c] = activation[:, :, c, :].sum()
                 for h in range(height + 2 * pad - fd + 1):
                     for w in range(width + 2 * pad - fd + 1):
                         A_pad_slice = A_pad[h:h+fd, w:w+fd, :, i]
