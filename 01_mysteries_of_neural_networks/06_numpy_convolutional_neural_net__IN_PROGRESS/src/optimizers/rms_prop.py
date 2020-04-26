@@ -1,12 +1,17 @@
-from typing import List
-
-from src.base import Optimizer, Layer
+from typing import List, Tuple
 
 import numpy as np
 
+from src.base import Optimizer, Layer
+
 
 class RMSProp(Optimizer):
-    def __init__(self, lr, beta=0.9, eps=1e-8):
+    def __init__(self, lr: float, beta: float = 0.9, eps: float = 1e-8):
+        """
+        :param lr - learning rate
+        :param beta - discounting factor for the history/coming gradient
+        :param eps - small value to avoid zero denominator
+        """
         self._cache = {}
         self._lr = lr
         self._beta = beta
@@ -22,8 +27,7 @@ class RMSProp(Optimizer):
                 continue
 
             (w, b), (dw, db) = weights, gradients
-            dw_key = f"dw{idx}"
-            db_key = f"db{idx}"
+            dw_key, db_key = RMSProp._get_cache_keys(idx)
 
             self._cache[dw_key] = self._beta * self._cache[dw_key] + \
                 (1 - self._beta) * np.square(dw)
@@ -45,8 +49,15 @@ class RMSProp(Optimizer):
                 continue
 
             dw, db = gradients
-            dw_key = f"dw{idx}"
-            db_key = f"db{idx}"
+            dw_key, db_key = RMSProp._get_cache_keys(idx)
 
             self._cache[dw_key] = np.zeros_like(dw)
             self._cache[db_key] = np.zeros_like(db)
+
+    @staticmethod
+    def _get_cache_keys(idx: int) -> Tuple[str, str]:
+        """
+        :param idx - index of layer
+        """
+        return f"dw{idx}", f"db{idx}"
+
