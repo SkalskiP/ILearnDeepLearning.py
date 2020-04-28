@@ -73,6 +73,7 @@ class MaxPoolLayer(Layer):
                 w_end = w_start + w_pool
                 output[:, h_start:h_end, w_start:w_end, :] += \
                     da_curr[:, i:i + 1, j:j + 1, :] * self._cache[(i, j)]
+        return output
 
     def _save_mask(self, x: np.array, cords: Tuple[int, int]) -> None:
         mask = np.zeros_like(x)
