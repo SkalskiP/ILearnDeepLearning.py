@@ -15,20 +15,22 @@ def convert_categorical2one_hot(y: np.array) -> np.array:
 
 def convert_prob2categorical(probs: np.array) -> np.array:
     """
+    :param probs - softmax output array with (n, k) shape
+    :return categorical array with (n, ) shape
+    ----------------------------------------------------------------------------
     k - number of classes
-    N - number of items
-    :param probs - softmax output array with (N, k) shape
-    :return categorical array with (N, ) shape
+    n - number of examples
     """
     return np.argmax(probs, axis=1)
 
 
 def convert_prob2one_hot(probs: np.array) -> np.array:
     """
+    :param probs - softmax output array with (n, k) shape
+    :return one hot array with (n, k) shape
+    ----------------------------------------------------------------------------
     k - number of classes
-    N - number of items
-    :param probs - softmax output array with (N, k) shape
-    :return one hot array with (N, k) shape
+    n - number of examples
     """
     class_idx = convert_prob2categorical(probs)
     one_hot_matrix = np.zeros_like(probs)
@@ -38,12 +40,12 @@ def convert_prob2one_hot(probs: np.array) -> np.array:
 
 def generate_batches(x: np.array, y: np.array, batch_size: int):
     """
-    N - number of examples in data set
-    n - number of examples in batch [batch_size]
-    k - number of classes
-    :param x - features array with (N, ...) shape
-    :param y - one hot ground truth array with (N, k) shape
+    :param x - features array with (n, ...) shape
+    :param y - one hot ground truth array with (n, k) shape
     :batch_size - number of elements in single batch
+    ----------------------------------------------------------------------------
+    n - number of examples in data set
+    k - number of classes
     """
     for i in range(0, x.shape[0], batch_size):
         yield (
