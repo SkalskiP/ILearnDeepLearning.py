@@ -5,6 +5,7 @@ from typing import Tuple, Optional
 import numpy as np
 
 from src.base import Layer
+from src.errors import InvalidPaddingModeError
 
 
 class ConvLayer2D(Layer):
@@ -90,3 +91,21 @@ class ConvLayer2D(Layer):
         """
         self._w = w
         self._b = b
+
+    def get_pad_width(self) -> int:
+        if self._padding == 'same':
+            return int((self._w.shape[0] - 1) / 2)
+        elif self._padding == 'valid':
+            return 0
+        else:
+            raise InvalidPaddingModeError(
+                f"Unsupported padding value: {self._padding}"
+            )
+
+    @staticmethod
+    def pad(array: np.array, pad: int) -> np.array:
+        return np.pad(
+            array=array,
+            pad_width=((0, 0), (pad, pad), (pad, pad), (0, 0)),
+            mode='constant'
+        )
