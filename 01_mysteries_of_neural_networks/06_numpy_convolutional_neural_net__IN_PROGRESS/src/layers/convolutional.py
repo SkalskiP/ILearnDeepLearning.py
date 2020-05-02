@@ -6,7 +6,7 @@ import numpy as np
 
 from src.base import Layer
 from src.errors import InvalidPaddingModeError
-from src.utils.fast_conv import im2col
+from src.utils.fast_conv import im2col, col2im
 
 
 class ConvLayer2D(Layer):
@@ -122,7 +122,7 @@ class ConvLayer2D(Layer):
 
         return output.transpose(3, 1, 2, 0) + self._b
 
-    def backward_pass(self, da_curr: np.array) -> np.array:
+    def slow_backward_pass(self, da_curr: np.array) -> np.array:
         """
         :param da_curr - 4D tensor with shape (n, h_out, w_out, n_f)
         :output 4D tensor with shape (n, h_in, w_in, c)
@@ -164,6 +164,46 @@ class ConvLayer2D(Layer):
 
         self._dw /= n
         return output[:, pad[0]:pad[0]+h_in, pad[1]:pad[1]+w_in, :]
+
+    def backward_pass(self, da_curr: np.array) -> np.array:
+        """
+        :param da_curr - 4D tensor with shape (n, h_out, w_out, n_f)
+        :output 4D tensor with shape (n, h_in, w_in, c)
+        ------------------------------------------------------------------------
+        n - number of examples in batch
+        w_in - width of input volume
+        h_in - width of input volume
+        w_out - width of input volume
+        h_out - width of input volume
+        c - number of channels of the input volume
+        n_f - number of filters in filter volume
+        """
+        n, h_out, w_out, _ = self.calculate_output_dims(input_dims=self._a_prev.shape)
+        h_f, w_f, _, n_f = self._w.shape
+        pad = self.calculate_pad_dims()
+        w = np.transpose(self._w, (3, 2, 0, 1))
+
+        cols = im2col(
+            array=np.moveaxis(self._a_prev, -1, 1),
+            filter_dim=(h_f, w_f),
+            pad=pad[0],
+            stride=self._stride
+        )
+
+        self._db = da_curr.sum(axis=(0, 1, 2)) / n
+        da_curr_reshaped = da_curr.transpose(3, 1, 2, 0).reshape(n_f, -1)
+        dw = da_curr_reshaped.dot(cols.T).reshape(w.shape)
+        self._dw = np.transpose(dw, (2, 3, 1, 0))
+
+        output_cols = w.reshape(n_f, -1).T.dot(da_curr_reshaped)
+        output = col2im(
+            cols=output_cols,
+            array_shape=np.moveaxis(self._a_prev, -1, 1).shape,
+            filter_dim=(h_f, w_f),
+            pad=pad[0],
+            stride=self._stride
+        )
+        return np.transpose(output, (0, 2, 3, 1))
 
     def set_wights(self, w: np.array, b: np.array) -> None:
         """
