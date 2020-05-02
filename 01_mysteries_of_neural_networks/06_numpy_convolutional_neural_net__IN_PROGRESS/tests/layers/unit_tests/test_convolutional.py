@@ -190,35 +190,30 @@ class TestConvLayer2D:
         with pytest.raises(InvalidPaddingModeError):
             _ = layer.forward_pass(activation)
 
-    # def test_backward_pass_only_size_same_padding(self):
-    #     # given
-    #     activation = np.random.rand(11, 11, 3, 64)
-    #     W = np.random.rand(16, 5, 5, 3)
-    #     b = np.random.rand(16)
-    #     layer = ConvLayer2D(W=W, b=b, padding='same')
-    #
-    #     # when
-    #     forward_result = layer.forward_pass(activation)
-    #     backward_result = layer.backward_pass(forward_result)
-    #
-    #     # then
-    #     assert backward_result.shape == activation.shape
-    #
-    # def test_backward_pass_only_size_valid_padding(self):
-    #     # given
-    #     activation = np.random.rand(11, 11, 3, 64)
-    #     W = np.random.rand(16, 5, 5, 3)
-    #     b = np.random.rand(16)
-    #     layer = ConvLayer2D(W=W, b=b, padding='valid')
-    #
-    #     # when
-    #     forward_result = layer.forward_pass(activation)
-    #     backward_result = layer.backward_pass(forward_result)
-    #
-    #     # then
-    #     assert backward_result.shape == activation.shape
+    def test_backward_pass_only_size_same_padding(self):
+        # given
+        activation = np.random.rand(64, 11, 11, 3)
+        w = np.random.rand(5, 5, 3, 16)
+        b = np.random.rand(16)
+        layer = ConvLayer2D(w=w, b=b, padding='same')
 
+        # when
+        forward_result = layer.forward_pass(activation)
+        backward_result = layer.backward_pass(forward_result)
 
+        # then
+        assert backward_result.shape == activation.shape
 
+    def test_backward_pass_only_size_valid_padding(self):
+        # given
+        activation = np.random.rand(64, 11, 11, 3)
+        w = np.random.rand(5, 5, 3, 16)
+        b = np.random.rand(16)
+        layer = ConvLayer2D(w=w, b=b, padding='valid')
 
+        # when
+        forward_result = layer.forward_pass(activation)
+        backward_result = layer.backward_pass(forward_result)
 
+        # then
+        assert backward_result.shape == activation.shape

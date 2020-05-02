@@ -30,7 +30,7 @@ class ConvLayer2D(Layer):
         self._padding = padding
         self._stride = stride
         self._dw, self._db = None, None
-        self._A = None
+        self._a_prev = None
 
     @classmethod
     def initialize(
@@ -66,12 +66,13 @@ class ConvLayer2D(Layer):
         c - number of channels of the input volume
         n_f - number of filters in filter volume
         """
+        self._a_prev = np.array(a_prev, copy=True)
         output_shape = self.calculate_output_dims(input_dims=a_prev.shape)
         n, h_in, w_in, _ = a_prev.shape
         _, h_out, w_out, _ = output_shape
         h_f, w_f, _, n_f = self._w.shape
         pad = self.calculate_pad_dims()
-        a_prev_with_pad = self.pad(array=a_prev, pad=pad)
+        a_prev_pad = self.pad(array=a_prev, pad=pad)
         output = np.zeros(output_shape)
 
         for i in range(h_out):
@@ -82,7 +83,7 @@ class ConvLayer2D(Layer):
                 w_end = w_start + w_f
 
                 output[:, i, j, :] = np.sum(
-                    a_prev_with_pad[:, h_start:h_end, w_start:w_end, :, np.newaxis] *
+                    a_prev_pad[:, h_start:h_end, w_start:w_end, :, np.newaxis] *
                     self._w[np.newaxis, :, :, :],
                     axis=(1, 2, 3)
                 )
@@ -91,16 +92,46 @@ class ConvLayer2D(Layer):
 
     def backward_pass(self, da_curr: np.array) -> np.array:
         """
-        :param da_curr - 4D tensor with shape (n, h, w, n_f)
-        :output 4D tensor with shape (n, h, w, c)
+        :param da_curr - 4D tensor with shape (n, h_out, w_out, n_f)
+        :output 4D tensor with shape (n, h_in, w_in, c)
         ------------------------------------------------------------------------
         n - number of examples in batch
         w_in - width of input volume
         h_in - width of input volume
+        w_out - width of input volume
+        h_out - width of input volume
         c - number of channels of the input volume
         n_f - number of filters in filter volume
         """
-        pass
+        _, h_out, w_out, _ = da_curr.shape
+        n, h_in, w_in, _ = self._a_prev.shape
+        h_f, w_f, _, _ = self._w.shape
+        pad = self.calculate_pad_dims()
+        a_prev_pad = self.pad(array=self._a_prev, pad=pad)
+        output = np.zeros_like(a_prev_pad)
+
+        self._db = da_curr.sum(axis=(0, 1, 2)) / n
+        self._dw = np.zeros_like(self._w)
+
+        for i in range(h_out):
+            for j in range(w_out):
+                h_start = i * self._stride
+                h_end = h_start + h_f
+                w_start = j * self._stride
+                w_end = w_start + w_f
+                output[:, h_start:h_end, w_start:w_end, :] += np.sum(
+                    self._w[np.newaxis, :, :, :, :] *
+                    da_curr[:, i:i+1, j:j+1, np.newaxis, :],
+                    axis=4
+                )
+                self._dw += np.sum(
+                    a_prev_pad[:, h_start:h_end, w_start:w_end, :, np.newaxis] *
+                    da_curr[:, i:i+1, j:j+1, np.newaxis, :],
+                    axis=0
+                )
+
+        self._dw /= n
+        return output[:, pad[0]:pad[0]+h_in, pad[1]:pad[1]+w_in, :]
 
     def set_wights(self, w: np.array, b: np.array) -> None:
         """
