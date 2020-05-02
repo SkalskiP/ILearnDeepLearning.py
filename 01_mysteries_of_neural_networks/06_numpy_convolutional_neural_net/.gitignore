@@ -1,0 +1,7 @@
+# Jupyter checkpoints
+**/.ipynb_checkpoints
+
+# PyCharm and mac and azure ml and VS Code files
+.idea
+.vscode
+.DS_Store
