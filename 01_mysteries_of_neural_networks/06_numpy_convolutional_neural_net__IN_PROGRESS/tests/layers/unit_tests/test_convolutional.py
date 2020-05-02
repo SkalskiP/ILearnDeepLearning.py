@@ -149,13 +149,46 @@ class TestConvLayer2D:
             _ = layer.calculate_output_dims((32, 11, 11, 3))
 
     def test_forward_pass_with_same_padding(self):
-        pass
+        # given
+        w = np.random.rand(5, 5, 3, 16)
+        b = np.random.rand(16)
+        activation = np.random.rand(16, 11, 11, 3)
+        padding = 'same'
+
+        # when
+        layer = ConvLayer2D(w=w, b=b, padding=padding)
+        result = layer.forward_pass(activation)
+
+        assert result.shape == (16, 11, 11, 16)
+        expected_val = np.sum(w[:, :, :, 0] * activation[0, 0:5, 0:5, :]) + b[0]
+        assert abs(expected_val - result[0, 2, 2, 0]) < 1e-8
 
     def test_forward_pass_with_valid_padding(self):
-        pass
+        # given
+        w = np.random.rand(5, 5, 3, 16)
+        b = np.random.rand(16)
+        activation = np.random.rand(16, 11, 11, 3)
+        padding = 'valid'
+
+        # when
+        layer = ConvLayer2D(w=w, b=b, padding=padding)
+        result = layer.forward_pass(activation)
+
+        assert result.shape == (16, 7, 7, 16)
+        expected_val = np.sum(w[:, :, :, 0] * activation[0, 0:5, 0:5, :]) + b[0]
+        assert abs(expected_val - result[0, 0, 0, 0]) < 1e-8
 
     def test_forward_pass_with_invalid_padding_value(self):
-        pass
+        # given
+        w = np.random.rand(5, 5, 3, 16)
+        b = np.random.rand(16)
+        activation = np.random.rand(16, 11, 11, 3)
+        padding = 'lorem ipsum'
+
+        # when
+        layer = ConvLayer2D(w=w, b=b, padding=padding)
+        with pytest.raises(InvalidPaddingModeError):
+            _ = layer.forward_pass(activation)
 
     # def test_backward_pass_only_size_same_padding(self):
     #     # given
