@@ -6,6 +6,7 @@ import numpy as np
 
 from src.base import Layer
 from src.errors import InvalidPaddingModeError
+from src.utils.fast_conv import im2col
 
 
 class ConvLayer2D(Layer):
@@ -19,7 +20,7 @@ class ConvLayer2D(Layer):
         :param w -  4D tensor with shape (h_f, w_f, c_f, n_f)
         :param b - 1D tensor with shape (n_f, )
         :param padding - flag describing type of activation padding valid/same
-        :param stride - stride along width and height of input volume used to
+        :param stride - stride along width and height of input volume
         ------------------------------------------------------------------------
         h_f - height of filter volume
         w_f - width of filter volume
@@ -53,7 +54,7 @@ class ConvLayer2D(Layer):
             return None
         return self._dw, self._db
 
-    def forward_pass(self, a_prev: np.array) -> np.array:
+    def slow_forward_pass(self, a_prev: np.array) -> np.array:
         """
         :param a_prev - 4D tensor with shape (n, h_in, w_in, c)
         :output 4D tensor with shape (n, h_out, w_out, n_f)
@@ -89,6 +90,37 @@ class ConvLayer2D(Layer):
                 )
 
         return output + self._b
+
+    def forward_pass(self, a_prev: np.array) -> np.array:
+        """
+        :param a_prev - 4D tensor with shape (n, h_in, w_in, c)
+        :output 4D tensor with shape (n, h_out, w_out, n_f)
+        ------------------------------------------------------------------------
+        n - number of examples in batch
+        w_in - width of input volume
+        h_in - width of input volume
+        w_out - width of input volume
+        h_out - width of input volume
+        c - number of channels of the input volume
+        n_f - number of filters in filter volume
+        """
+        self._a_prev = np.array(a_prev, copy=True)
+        n, h_out, w_out, _ = self.calculate_output_dims(input_dims=a_prev.shape)
+        h_f, w_f, _, n_f = self._w.shape
+        pad = self.calculate_pad_dims()
+        w = np.transpose(self._w, (3, 2, 0, 1))
+
+        cols = im2col(
+            array=np.moveaxis(a_prev, -1, 1),
+            filter_dim=(h_f, w_f),
+            pad=pad[0],
+            stride=self._stride
+        )
+
+        result = w.reshape((n_f, -1)).dot(cols)
+        output = result.reshape(n_f, h_out, w_out, n)
+
+        return output.transpose(3, 1, 2, 0) + self._b
 
     def backward_pass(self, da_curr: np.array) -> np.array:
         """
@@ -166,8 +198,8 @@ class ConvLayer2D(Layer):
         if self._padding == 'same':
             return n, h_in, w_in, n_f
         elif self._padding == 'valid':
-            h_out = int((h_in - h_f) / self._stride) + 1
-            w_out = int((w_in - w_f) / self._stride) + 1
+            h_out = (h_in - h_f) // self._stride + 1
+            w_out = (w_in - w_f) // self._stride + 1
             return n, h_out, w_out, n_f
         else:
             raise InvalidPaddingModeError(
@@ -183,7 +215,7 @@ class ConvLayer2D(Layer):
         """
         if self._padding == 'same':
             h_f, w_f, _, _ = self._w.shape
-            return int((h_f - 1) / 2), int((w_f - 1) / 2)
+            return (h_f - 1) // 2, (w_f - 1) // 2
         elif self._padding == 'valid':
             return 0, 0
         else:
