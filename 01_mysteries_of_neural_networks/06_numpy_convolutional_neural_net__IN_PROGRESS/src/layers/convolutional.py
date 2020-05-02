@@ -13,7 +13,7 @@ class ConvLayer2D(Layer):
         self, w: np.array,
         b: np.array,
         padding: str = 'valid',
-        stride: int = 2
+        stride: int = 1
     ):
         """
         :param w -  4D tensor with shape (h_f, w_f, c_f, n_f)
@@ -37,7 +37,7 @@ class ConvLayer2D(Layer):
         cls, filters: int,
         kernel_shape: Tuple[int, int, int],
         padding: str = 'valid',
-        stride: int = 2
+        stride: int = 1
     ) -> ConvLayer2D:
         w = np.random.randn(*kernel_shape, filters) * 0.1
         b = np.random.randn(filters) * 0.1
@@ -55,25 +55,48 @@ class ConvLayer2D(Layer):
 
     def forward_pass(self, a_prev: np.array) -> np.array:
         """
-        :param a_prev - 4D tensor with shape(n, h, w, c)
-        :output 4D tensor with shape(n, h, w, n_f)
+        :param a_prev - 4D tensor with shape (n, h_in, w_in, c)
+        :output 4D tensor with shape (n, h_out, w_out, n_f)
         ------------------------------------------------------------------------
         n - number of examples in batch
-        w - width of input volume
-        h - width of input volume
+        w_in - width of input volume
+        h_in - width of input volume
+        w_out - width of input volume
+        h_out - width of input volume
         c - number of channels of the input volume
         n_f - number of filters in filter volume
         """
-        pass
+        output_shape = self.calculate_output_dims(input_dims=a_prev.shape)
+        n, h_in, w_in, _ = a_prev.shape
+        _, h_out, w_out, _ = output_shape
+        h_f, w_f, _, n_f = self._w.shape
+        pad = self.calculate_pad_dims()
+        a_prev_with_pad = self.pad(array=a_prev, pad=pad)
+        output = np.zeros(output_shape)
+
+        for i in range(h_out):
+            for j in range(w_out):
+                h_start = i * self._stride
+                h_end = h_start + h_f
+                w_start = j * self._stride
+                w_end = w_start + w_f
+
+                output[:, i, j, :] = np.sum(
+                    a_prev_with_pad[:, h_start:h_end, w_start:w_end, :, np.newaxis] *
+                    self._w[np.newaxis, :, :, :],
+                    axis=(1, 2, 3)
+                )
+
+        return output + self._b
 
     def backward_pass(self, da_curr: np.array) -> np.array:
         """
-        :param da_curr - 4D tensor with shape(n, h, w, n_f)
-        :output 4D tensor with shape(n, h, w, c)
+        :param da_curr - 4D tensor with shape (n, h, w, n_f)
+        :output 4D tensor with shape (n, h, w, c)
         ------------------------------------------------------------------------
         n - number of examples in batch
-        w - width of input volume
-        h - width of input volume
+        w_in - width of input volume
+        h_in - width of input volume
         c - number of channels of the input volume
         n_f - number of filters in filter volume
         """
@@ -92,20 +115,70 @@ class ConvLayer2D(Layer):
         self._w = w
         self._b = b
 
-    def get_pad_width(self) -> int:
+    def calculate_output_dims(
+        self, input_dims: Tuple[int, int, int, int]
+    ) -> Tuple[int, int, int, int]:
+        """
+        :param input_dims - 4 element tuple (n, h_in, w_in, c)
+        :output 4 element tuple (n, h_out, w_out, n_f)
+        ------------------------------------------------------------------------
+        n - number of examples in batch
+        w_in - width of input volume
+        h_in - width of input volume
+        w_out - width of input volume
+        h_out - width of input volume
+        c - number of channels of the input volume
+        n_f - number of filters in filter volume
+        """
+        n, h_in, w_in, _ = input_dims
+        h_f, w_f, _, n_f = self._w.shape
         if self._padding == 'same':
-            return int((self._w.shape[0] - 1) / 2)
+            return n, h_in, w_in, n_f
         elif self._padding == 'valid':
-            return 0
+            h_out = int((h_in - h_f) / self._stride) + 1
+            w_out = int((w_in - w_f) / self._stride) + 1
+            return n, h_out, w_out, n_f
+        else:
+            raise InvalidPaddingModeError(
+                f"Unsupported padding value: {self._padding}"
+            )
+
+    def calculate_pad_dims(self) -> Tuple[int, int]:
+        """
+        :output - 2 element tuple (h_pad, w_pad)
+        ------------------------------------------------------------------------
+        h_pad - single side padding on height of the volume
+        w_pad - single side padding on width of the volume
+        """
+        if self._padding == 'same':
+            h_f, w_f, _, _ = self._w.shape
+            return int((h_f - 1) / 2), int((w_f - 1) / 2)
+        elif self._padding == 'valid':
+            return 0, 0
         else:
             raise InvalidPaddingModeError(
                 f"Unsupported padding value: {self._padding}"
             )
 
     @staticmethod
-    def pad(array: np.array, pad: int) -> np.array:
+    def pad(array: np.array, pad: Tuple[int, int]) -> np.array:
+        """
+        :param array -  4D tensor with shape (n, h_in, w_in, c)
+        :param pad - 2 element tuple (h_pad, w_pad)
+        :output 4D tensor with shape (n, h_out, w_out, n_f)
+        ------------------------------------------------------------------------
+        n - number of examples in batch
+        w_in - width of input volume
+        h_in - width of input volume
+        w_out - width of input volume
+        h_out - width of input volume
+        c - number of channels of the input volume
+        n_f - number of filters in filter volume
+        h_pad - single side padding on height of the volume
+        w_pad - single side padding on width of the volume
+        """
         return np.pad(
             array=array,
-            pad_width=((0, 0), (pad, pad), (pad, pad), (0, 0)),
+            pad_width=((0, 0), (pad[0], pad[0]), (pad[1], pad[1]), (0, 0)),
             mode='constant'
         )
