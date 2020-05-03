@@ -59,6 +59,16 @@ def generate_batches(x: np.array, y: np.array, batch_size: int):
 
 
 def format_time(start_time: time.time, end_time: time.time) -> str:
+    """
+    :param start_time - beginning of time period
+    :param end_time - ending of time period
+    :output - string in HH:MM:SS.ss format
+    ----------------------------------------------------------------------------
+    HH - hours
+    MM - minutes
+    SS - seconds
+    ss - hundredths of a second
+    """
     hours, rem = divmod(end_time - start_time, 3600)
     minutes, seconds = divmod(rem, 60)
     return "{:0>2}:{:0>2}:{:05.2f}".format(int(hours), int(minutes), seconds)
