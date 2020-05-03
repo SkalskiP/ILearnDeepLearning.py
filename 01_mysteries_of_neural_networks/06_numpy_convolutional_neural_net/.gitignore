@@ -5,3 +5,6 @@
 .idea
 .vscode
 .DS_Store
+
+# Py Test
+.pytest_cache

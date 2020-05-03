@@ -2,8 +2,9 @@ from __future__ import annotations
 
 from typing import Optional, Tuple
 
-from src.base import Layer
 import numpy as np
+
+from src.base import Layer
 
 
 class DenseLayer(Layer):
