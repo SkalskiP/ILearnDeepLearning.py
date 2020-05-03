@@ -11,7 +11,7 @@ class TestFlattenLayer:
 
         # when
         flatten_layer = FlattenLayer()
-        result = flatten_layer.forward_pass(activation)
+        result = flatten_layer.forward_pass(activation, training=True)
 
         # then
         assert result.shape == (100, 28 * 28)
@@ -22,7 +22,7 @@ class TestFlattenLayer:
 
         # when
         flatten_layer = FlattenLayer()
-        result = flatten_layer.forward_pass(activation)
+        result = flatten_layer.forward_pass(activation, training=True)
 
         # then
         assert result.shape == (100, 28 * 28 * 3)
@@ -33,7 +33,7 @@ class TestFlattenLayer:
 
         # when
         flatten_layer = FlattenLayer()
-        forward_result = flatten_layer.forward_pass(activation)
+        forward_result = flatten_layer.forward_pass(activation, training=True)
         backward_result = flatten_layer.backward_pass(forward_result)
 
         # then
@@ -45,7 +45,7 @@ class TestFlattenLayer:
 
         # when
         flatten_layer = FlattenLayer()
-        forward_result = flatten_layer.forward_pass(activation)
+        forward_result = flatten_layer.forward_pass(activation, training=True)
         backward_result = flatten_layer.backward_pass(forward_result)
 
         # then

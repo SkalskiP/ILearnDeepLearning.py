@@ -23,7 +23,7 @@ class TestMaxPoolLayer:
 
         # when
         layer = MaxPoolLayer(pool_size=pool_size, stride=stride)
-        result = layer.forward_pass(activation)
+        result = layer.forward_pass(activation, training=True)
 
         # then
         assert result.shape == (1, 2, 2, 1)
@@ -73,7 +73,7 @@ class TestMaxPoolLayer:
 
         # when
         layer = MaxPoolLayer(pool_size=pool_size, stride=stride)
-        result = layer.forward_pass(activation)
+        result = layer.forward_pass(activation, training=True)
 
         # then
         assert result.shape == (1, 2, 2, 2)
@@ -111,7 +111,7 @@ class TestMaxPoolLayer:
 
         # when
         layer = MaxPoolLayer(pool_size=pool_size, stride=stride)
-        result = layer.forward_pass(activation)
+        result = layer.forward_pass(activation, training=True)
 
         # then
         assert result.shape == (2, 2, 2, 1)
@@ -142,7 +142,7 @@ class TestMaxPoolLayer:
 
         # when
         layer = MaxPoolLayer(pool_size=pool_size, stride=stride)
-        _ = layer.forward_pass(forward_activation)
+        _ = layer.forward_pass(forward_activation, training=True)
         backward_result = layer.backward_pass(backward_activation)
 
         # then
@@ -219,7 +219,7 @@ class TestMaxPoolLayer:
 
         # when
         layer = MaxPoolLayer(pool_size=pool_size, stride=stride)
-        _ = layer.forward_pass(forward_activation)
+        _ = layer.forward_pass(forward_activation, training=True)
         backward_result = layer.backward_pass(backward_activation)
 
         # then
@@ -272,7 +272,7 @@ class TestMaxPoolLayer:
 
         # when
         layer = MaxPoolLayer(pool_size=pool_size, stride=stride)
-        _ = layer.forward_pass(forward_activation)
+        _ = layer.forward_pass(forward_activation, training=True)
         backward_result = layer.backward_pass(backward_activation)
 
         # then
