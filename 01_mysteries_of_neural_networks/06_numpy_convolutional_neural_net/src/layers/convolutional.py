@@ -178,7 +178,8 @@ class ConvLayer2D(Layer):
         c - number of channels of the input volume
         n_f - number of filters in filter volume
         """
-        n, h_out, w_out, _ = self.calculate_output_dims(input_dims=self._a_prev.shape)
+        n, h_out, w_out, _ = self.calculate_output_dims(
+            input_dims=self._a_prev.shape)
         h_f, w_f, _, n_f = self._w.shape
         pad = self.calculate_pad_dims()
         w = np.transpose(self._w, (3, 2, 0, 1))
