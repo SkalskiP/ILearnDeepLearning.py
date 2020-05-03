@@ -8,6 +8,7 @@ from src.base import Layer
 
 
 class MaxPoolLayer(Layer):
+
     def __init__(self, pool_size: Tuple[int, int], stride: int = 2):
         """
         :param pool_size - tuple holding shape of 2D pooling window
@@ -19,7 +20,7 @@ class MaxPoolLayer(Layer):
         self._a = None
         self._cache = {}
 
-    def forward_pass(self, a_prev: np.array) -> np.array:
+    def forward_pass(self, a_prev: np.array, training: bool) -> np.array:
         """
         :param a_prev - 4D tensor with shape(n, h_in, w_in, c)
         :output 4D tensor with shape(n, h_out, w_out, c)

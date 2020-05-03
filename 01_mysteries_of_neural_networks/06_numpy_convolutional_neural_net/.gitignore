@@ -8,3 +8,11 @@
 
 # Py Test
 .pytest_cache
+
+# Cython
+*.pyc
+*.pyo
+__pycache__
+*.so
+*.o
+*.c

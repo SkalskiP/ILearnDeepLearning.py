@@ -4,10 +4,11 @@ from src.base import Layer
 
 
 class FlattenLayer(Layer):
+
     def __init__(self):
         self._shape = ()
 
-    def forward_pass(self, a_prev: np.array) -> np.array:
+    def forward_pass(self, a_prev: np.array, training: bool) -> np.array:
         """
         :param a_prev - ND tensor with shape (n, ..., channels)
         :output - 1D tensor with shape (n, 1)

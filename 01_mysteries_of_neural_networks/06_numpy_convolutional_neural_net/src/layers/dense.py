@@ -8,6 +8,7 @@ from src.base import Layer
 
 
 class DenseLayer(Layer):
+
     def __init__(self, w: np.array, b: np.array):
         """
         :param w - 2D weights tensor with shape (units_curr, units_prev)
@@ -40,7 +41,7 @@ class DenseLayer(Layer):
             return None
         return self._dw, self._db
 
-    def forward_pass(self, a_prev: np.array) -> np.array:
+    def forward_pass(self, a_prev: np.array, training: bool) -> np.array:
         """
         :param a_prev - 2D tensor with shape (n, units_prev)
         :output - 2D tensor with shape (n, units_curr)

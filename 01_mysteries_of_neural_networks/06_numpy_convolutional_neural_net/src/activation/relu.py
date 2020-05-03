@@ -7,7 +7,7 @@ class ReluLayer(Layer):
     def __init__(self):
         self._z = None
 
-    def forward_pass(self, a_prev: np.array) -> np.array:
+    def forward_pass(self, a_prev: np.array, training: bool) -> np.array:
         """
         :param a_prev - ND tensor with shape (n, ..., channels)
         :output ND tensor with shape (n, ..., channels)

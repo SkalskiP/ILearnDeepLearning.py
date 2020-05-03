@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 
 def convert_categorical2one_hot(y: np.array) -> np.array:
@@ -56,3 +57,8 @@ def generate_batches(x: np.array, y: np.array, batch_size: int):
                 i, min(i + batch_size, y.shape[0])), axis=0)
         )
 
+
+def format_time(start_time: time.time, end_time: time.time) -> str:
+    hours, rem = divmod(end_time - start_time, 3600)
+    minutes, seconds = divmod(rem, 60)
+    return "{:0>2}:{:0>2}:{:05.2f}".format(int(hours), int(minutes), seconds)

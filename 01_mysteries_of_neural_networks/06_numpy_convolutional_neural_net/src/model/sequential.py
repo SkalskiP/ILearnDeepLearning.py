@@ -1,9 +1,10 @@
 from typing import List, Dict
+import time
 
 import numpy as np
 
 from src.base import Layer, Optimizer
-from src.utils.core import generate_batches
+from src.utils.core import generate_batches, format_time
 from src.utils.metrics import softmax_accuracy, softmax_cross_entropy
 
 
@@ -42,11 +43,12 @@ class SequentialModel:
         """
 
         for epoch in range(epochs):
+            epoch_start = time.time()
             y_hat = np.zeros_like(y_train)
             for idx, (x_batch, y_batch) in \
                     enumerate(generate_batches(x_train, y_train, bs)):
 
-                y_hat_batch = self._forward(x_batch)
+                y_hat_batch = self._forward(x_batch, training=True)
                 activation = y_hat_batch - y_batch
                 self._backward(activation)
                 self._update()
@@ -57,15 +59,16 @@ class SequentialModel:
             self._train_acc.append(softmax_accuracy(y_hat, y_train))
             self._train_loss.append(softmax_cross_entropy(y_hat, y_train))
 
-            y_hat = self._forward(x_test)
+            y_hat = self._forward(x_test, training=False)
             test_acc = softmax_accuracy(y_hat, y_test)
             self._test_acc.append(test_acc)
             test_loss = softmax_cross_entropy(y_hat, y_test)
             self._test_loss.append(test_loss)
 
             if verbose:
-                print("Iter: {:05} - test loss: {:.5f} - test accuracy: {:.5f}"
-                      .format(epoch+1, test_loss, test_acc))
+                epoch_time = format_time(start_time=epoch_start, end_time=time.time())
+                print("iter: {:05} | test loss: {:.5f} | test accuracy: {:.5f} | time: {}"
+                      .format(epoch+1, test_loss, test_acc, epoch_time))
 
     def predict(self, x: np.array) -> np.array:
         """
@@ -75,7 +78,7 @@ class SequentialModel:
         n - number of examples in data set
         k - number of classes
         """
-        return self._forward(x)
+        return self._forward(x, training=False)
 
     @property
     def history(self) -> Dict[str, List[float]]:
@@ -86,10 +89,10 @@ class SequentialModel:
             "test_loss": self._test_loss
         }
 
-    def _forward(self, x: np.array) -> np.array:
+    def _forward(self, x: np.array, training: bool) -> np.array:
         activation = x
-        for layer in self._layers:
-            activation = layer.forward_pass(a_prev=activation)
+        for idx, layer in enumerate(self._layers):
+            activation = layer.forward_pass(a_prev=activation, training=training)
         return activation
 
     def _backward(self, x: np.array) -> None:

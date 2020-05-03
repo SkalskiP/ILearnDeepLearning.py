@@ -7,7 +7,7 @@ class SoftmaxLayer(Layer):
     def __init__(self):
         self._z = None
 
-    def forward_pass(self, a_prev: np.array) -> np.array:
+    def forward_pass(self, a_prev: np.array, training: bool) -> np.array:
         """
         :param a_prev - 2D tensor with shape (n, k)
         :output 2D tensor with shape (n, k)

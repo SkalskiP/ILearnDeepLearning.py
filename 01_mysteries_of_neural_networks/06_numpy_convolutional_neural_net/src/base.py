@@ -23,7 +23,7 @@ class Layer(ABC):
         return None
 
     @abstractmethod
-    def forward_pass(self, a_prev: np.array) -> np.array:
+    def forward_pass(self, a_prev: np.array, training: bool) -> np.array:
         """
         Perform layer forward propagation logic.
         """

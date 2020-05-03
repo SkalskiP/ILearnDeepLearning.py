@@ -1,3 +1,7 @@
+# ------------------------------------------------------------------------------
+# File was originally part of Stamford CS231N course: https://cs231n.github.io/
+# ------------------------------------------------------------------------------
+
 from typing import Tuple
 
 import numpy as np
