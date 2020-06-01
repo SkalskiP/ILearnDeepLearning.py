@@ -1,4 +1,5 @@
-from typing import List, Dict
+from __future__ import annotations
+from typing import List, Dict, Callable, Optional
 import time
 
 import numpy as np
@@ -26,7 +27,8 @@ class SequentialModel:
         y_test: np.array,
         epochs: int,
         bs: int = 64,
-        verbose: bool = False
+        verbose: bool = False,
+        callback: Optional[Callable[[SequentialModel], None]] = None
     ) -> None:
         """
         :param x_train - ND feature tensor with shape (n_train, ...)
@@ -36,6 +38,7 @@ class SequentialModel:
         :param epochs - number of epochs used during model training
         :param bs - size of batch used during model training
         :param verbose - if set to True, model will produce logs during training
+        :param callback - function that will be executed at the end of each epoch
         ------------------------------------------------------------------------
         n_train - number of examples in train data set
         n_test - number of examples in test data set
