@@ -32,7 +32,7 @@ Keras-Applications==1.0.4
 Keras-Preprocessing==1.0.2
 kiwisolver==1.0.1
 lesscpy==0.13.0
-lxml==4.2.5
+lxml==4.6.2
 Markdown==2.6.11
 MarkupSafe==1.0
 matplotlib==2.2.3
