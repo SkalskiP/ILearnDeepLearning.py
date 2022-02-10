@@ -1,7 +1,7 @@
 pandas==1.0.0
 matplotlib==3.1.3
 jupyter==1.0.0
-tensorflow==1.15.2
+tensorflow==2.5.3
 Pillow==6.2.0
 scikit-image==0.15.0
 eli5==0.10.1
