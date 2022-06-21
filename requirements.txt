@@ -42,7 +42,7 @@ more-itertools==4.3.0
 nbconvert==5.3.1
 nbformat==4.4.0
 notebook==5.7.8
-numpy==1.14.5
+numpy==1.22.0
 opencv-python==4.0.0.21
 pandas==0.23.4
 pandas-datareader==0.7.0
