@@ -55,7 +55,7 @@ pluggy==0.7.1
 ply==3.11
 prometheus-client==0.3.1
 prompt-toolkit==1.0.15
-protobuf==3.6.0
+protobuf==3.18.3
 ptyprocess==0.6.0
 py==1.6.0
 Pygments==2.2.0
